@@ -32,7 +32,7 @@ def extract_osm_edges(f_name):
         id = way['id']
         road = way['road']
         for i in range(len(road)-1):
-            edge_set.add(id, road[i], road[i+1], None)
+            edge_set.add(id, road[i], road[i+1], float('inf'))
 
     return edge_set
 

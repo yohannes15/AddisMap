@@ -64,4 +64,4 @@ class EdgeSet:
     
     def print_edge_set(self):
         for k, e in self.edges.items():
-            print("edge: " + str(k) + "\tfrom:" + str(e.f) + "\tto:" + str(e.t))
+            print("edge: " + str(k) + "\tfrom:" + str(e.f) + "\tto:" + str(e.t) + "\tdistance:" + str(e.w))

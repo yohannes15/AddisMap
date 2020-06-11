@@ -4,6 +4,7 @@ from mapvis.store import Node, NodeSet
 from mapvis.parser import get_default_parser, print_osm_data
 from mapvis.extract import extract_osm_nodes, select_nodes_in_rectangle, extract_osm_edges
 from mapvis.adjacency import adjacency_list
+from mapvis.algorithms import dijkstra
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 import os, json
@@ -19,10 +20,10 @@ def mapapp(request):
     node_set_values_json = json.dumps([node_set.__dict__ for node_set in node_set_values], cls=DjangoJSONEncoder)
 
     edges = extract_osm_edges(osmPath)
-    edges.print_edge_set()
     
     adj_list = adjacency_list(nodes, edges)
-    print(adj_list)
+    
+    dijkstra(adj_list, '1732976686', '1732976651')
     
     context = {
         'GMAPS_API_KEY': '',
