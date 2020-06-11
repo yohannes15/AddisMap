@@ -25,7 +25,7 @@ def mapapp(request):
     print(adj_list)
     
     context = {
-        'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q',
+        'GMAPS_API_KEY': '',
         'COORDS': node_set_values_json
     }
 
