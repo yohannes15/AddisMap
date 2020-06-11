@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>Member register</title>
+</head>
+<body>
+	<h1>Member register of the bobbin lace association</h1>
+	There are {{NUMBER_OF_MEMBERS}} members in the association.<br>
+
+	<h2>List of all members:</h2>
+	<ul>
+		{% for id, member in MEMBER_INFO.items %}
+    		<li>{{member.name}}</li>
+		{% endfor %}
+	</ul>
+
+	<h2>Members that are older than 50 years</h2>
+	<ul>
+		{% for id, member in MEMBER_INFO.items %}
+    		{% if member.age > 50 %}
+    			<li>{{member.name}}, {{member.age}} year(s) old.</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</body>
+</html>
