@@ -34,7 +34,7 @@ def mapapp(request):
 
         startNodeLatLng = node(post.lat1, post.lng1)
         destinationNodeLatLng = node(post.lat2, post.lng2)
-        closestNodeToStart = closestNodeTo(startNodeLatLng,nodes)
+        closestNodseToStart = closestNodeTo(startNodeLatLng,nodes)
         closestNodeToDestination = closestNodeTo(destinationNodeLatLng, nodes)
         
         shortestPath = dijkstra(adj_list, str(closestNodeToStart.id), str(closestNodeToDestination.id))
