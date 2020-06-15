@@ -5,6 +5,12 @@
     <head>
         <meta name="viewport"content="initial-scale=1.0, user-scalable=no"/>
         <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?key={{GMAPS_API_KEY}}&sensor=false">
         </script>
@@ -16,5 +22,27 @@
     </head>
     <body>
         <div id="map_canvas"></div>
+        <div>
+            <form action="" method="POST" class="form-inline" role="form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="start-latitude">Start Lat </label>
+                    <input type="number" step="any" class="form-control" name="start-latitude" id="start-latitude">
+                </div>
+                <div class="form-group">
+                    <label for="start-longitude">Start Long</label>
+                    <input type="number" step="any" class="form-control" name="start-longitude" id="start-longitude">
+                </div>
+                <div class="form-group">
+                    <label for="destination-latitude">Target Lat</label>
+                    <input type="number" step="any" class="form-control" name="destination-latitude" id="destination-latitude">
+                </div>
+                <div class="form-group">
+                    <label for="destination-longitude">Target Long</label>
+                    <input type="number" step="any" class="form-control" name="destination-longitude" id="destination-longitude">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
     </body>
 </html>
