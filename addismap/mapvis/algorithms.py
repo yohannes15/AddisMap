@@ -74,13 +74,13 @@ def closestNodeTo(nodeLatLng, AllNodeSet):
     print("clostest id is " + closestNode.id)
     return closestNode
 
-def createPathCoords(shortestPath, AllNodeSet):
-    pathCoords = []
-    for id in shortestPath:
-        nodeid = int(id)
-        for k, n in AllNodeSet.nodes.items():
-            if nodeid == k:
-                pathCoords.append()
+def shortestPathLatLng(shortestPath, AllNodeSet):
+    shortestPathCoords = []
+    for nodeid in shortestPath:
+        for i,node in AllNodeSet.nodes.items():
+            if int(node.id) == int(nodeid):
+                shortestPathCoords.append([float(node.lat), float(node.lng)])
+    return shortestPathCoords
 
 
 

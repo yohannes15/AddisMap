@@ -64,6 +64,34 @@ function createDestinationMarker(map, latlng, title) {
 //       });
 // }
 
+// document.getElementById('latlngform').onsubmit = function() {
+//     displayRoads(map)
+//     return false
+// }
+
+// $(document).on('submit', '#latlngform', function(e){
+//     e.preventDefault();
+
+//     $.ajax({
+//         type: 'POST',
+//         url: '/update',
+//         data: {
+//             allnodes:nodes,
+//             alledges:edges,
+//             startlatitude:$('#start-latitude').val(),
+//             startlongitude:$('#start-longitude').val(),
+//             destinationlatitude:$('#destination-latitude').val(),
+//             destinationlongitude:$('#destination-longitude').val(),
+//             csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+//         },
+//         success:function(){
+//             alert("Submitted");
+//         }
+//     });
+
+// });
+
+
 function createPolyline(map, path) {
     var polyline = new google.maps.Polyline({
       path: path,
@@ -71,10 +99,20 @@ function createPolyline(map, path) {
     });
   }
 
+
+
 function displayRoads(map) {
     var points = new google.maps.MVCArray();
-    points.push(new google.maps.LatLng(58.3970323, 15.5738155));
-    points.push(new google.maps.LatLng(58.3976588, 15.5738047));
+    for (i=0; i<shortestPath.length; i++) {
+        id = shortestPath[i];
+        nodeid = parseInt(id)
+        nodes.forEach(function(item){
+            if (nodeid === item.id){
+                points.push(new google.maps.LatLng(item.lat, item.lng))
+            }
+        }); 
+    }
+
     createPolyline(map, points);
 }
 

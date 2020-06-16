@@ -15,7 +15,10 @@
             src="http://maps.googleapis.com/maps/api/js?key={{GMAPS_API_KEY}}&sensor=false">
         </script>
         <script>
-            var COORDS = {{COORDS|safe}}
+            var nodes = {{ALL_NODES|safe}}
+            var shortestPath = {{SHORTEST_PATH|safe}}
+            //console.log(shortestPath)
+            //console.log(nodes)
         </script>
         <script src="{% static '/js/map.js' %}"></script>
 
@@ -23,7 +26,7 @@
     <body>
         <div id="map_canvas"></div>
         <div>
-            <form action="" method="POST" class="form-inline" role="form">
+            <form action="" method="POST" class="form-inline" role="form" id="latlngform">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="start-latitude">Start Lat </label>

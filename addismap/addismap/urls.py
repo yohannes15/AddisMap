@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from mapvis.views import mapapp
+from mapvis.views import showPath
+#from mapvis.views import update
 from bobbin_lace.views import memb_reg
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mapapp),
+    path('showpath/', showPath),
+    #path('update', update),
     path('bobbin_lace', memb_reg)
 ]

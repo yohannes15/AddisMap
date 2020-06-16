@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from mapvis.store import Node, NodeSet
 from mapvis.parser import get_default_parser, print_osm_data
 from mapvis.extract import extract_osm_nodes, select_nodes_in_rectangle, extract_osm_edges
 from mapvis.adjacency import adjacency_list
-from mapvis.algorithms import dijkstra, closestNodeTo
+from mapvis.algorithms import dijkstra, closestNodeTo, shortestPathLatLng
 from mapvis.parser_POST import POST_parser
 from mapvis.forms import LatLongForm
 from django.conf import settings
@@ -13,38 +13,60 @@ from collections import namedtuple
 import os, json
 
 # Create your views here.
-
 def mapapp(request):
-    osmPath = "/Users/yohannes/Developer/mapApp/addismap/mapvis/gerji"
-
-    nodes = extract_osm_nodes(osmPath)
-    node_set = select_nodes_in_rectangle(nodes, 9.00602,9.01380,38.75469,38.76639 )
-    node_set_values = list(node_set.get_nodes().values())
-    node_set_values_json = json.dumps([node_set.__dict__ for node_set in node_set_values], cls=DjangoJSONEncoder)
-    edges = extract_osm_edges(osmPath)
-    
-    adj_list = adjacency_list(nodes, edges)
+    #node_set = select_nodes_in_rectangle(nodes, 9.00602,9.01380,38.75469,38.76639 )
     #dijkstra(adj_list, '1732976686', '1732976651')
-    
-    node = namedtuple('Node', ['lat', 'lng'])
-    nodes.print_node_set()
+    if request.method == 'GET':
+        context = {
+            'GMAPS_API_KEY': ''
+        }
 
-    if request.method == "POST":
+    if request.method == 'POST':
+    
+        osmPath = "/Users/yohannes/Developer/mapApp/addismap/mapvis/gerji"
+
+        nodes = extract_osm_nodes(osmPath)
+        nodes_values = list(nodes.get_nodes().values())
+        nodes_json = json.dumps([node.__dict__ for node in nodes_values], cls=DjangoJSONEncoder)
+        edges = extract_osm_edges(osmPath)
+        
+        adj_list = adjacency_list(nodes, edges)
+        node = namedtuple('Node', ['lat', 'lng'])
+#####
         post = POST_parser(request)
 
         startNodeLatLng = node(post.lat1, post.lng1)
         destinationNodeLatLng = node(post.lat2, post.lng2)
-        closestNodseToStart = closestNodeTo(startNodeLatLng,nodes)
+        closestNodeToStart = closestNodeTo(startNodeLatLng,nodes)
         closestNodeToDestination = closestNodeTo(destinationNodeLatLng, nodes)
         
         shortestPath = dijkstra(adj_list, str(closestNodeToStart.id), str(closestNodeToDestination.id))
+        shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
+        print(shortestPath)
 
+        jsonShortestPathCoords = json.dumps(shortestPathCoords)
+        print(jsonShortestPathCoords)
 
-    
-    context = {
-        'GMAPS_API_KEY': '',
-        'COORDS': node_set_values_json
-    }
+        request.session['shortestPathCoords'] = jsonShortestPathCoords
+        return redirect('/showpath/')
+
+        
+
     
     return render(request, 'mapvis/mapapp.html', context)
 
+
+def showPath(request):
+    shortestPathCoords = request.session.get('shortestPathCoords')
+    context = {
+        'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q',
+        'SHORTEST_PATH_COORDS': shortestPathCoords,
+    }
+    return render(request, 'mapvis/show.html', context)
+
+
+    """ context = {
+            'GMAPS_API_KEY': '',
+            'SHORTEST_PATH': shortestPath,
+            'ALL_NODES':nodes_json
+        } """
