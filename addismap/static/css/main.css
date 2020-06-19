@@ -7,9 +7,11 @@ body {
     padding: 0 
 }
 
-#map_canvas { 
-    height: 80%; 
-    width: 80%;
+.map_canvas { 
+    height:75vh;
     border-radius: 15px;
     margin-bottom: 20px;
 }
+
+
+

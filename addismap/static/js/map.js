@@ -4,10 +4,13 @@ var marker2;
 var previousMarker;
 var clickCount = 0;
 
+
 function initialize() {
     var mapOptions = {
-        center: new google.maps.LatLng(9.00977, 38.76003),
-        zoom: 15,
+        center: new google.maps.LatLng(8.993029, 38.805703),
+        zoom: 16,
+        minZoom: 16,
+        maxZoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -36,10 +39,30 @@ function initialize() {
     map.panTo(event.latLng);
   }
     );
+
+    var allowedBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(8.989318, 38.793830),
+        new google.maps.LatLng(9.001513, 38.813769) 
+    );
+    var lastValidCenter = map.getCenter();
+    
+    google.maps.event.addListener(map, 'center_changed', function() {
+    if (allowedBounds.contains(map.getCenter())) {
+        // still within valid bounds, so save the last valid position
+        lastValidCenter = map.getCenter();
+        map.fitBounds(allowedBounds)
+        return; 
+    }
+    
+    // not valid anymore => return to last valid position
+    map.panTo(lastValidCenter);
+    });
+    
     //displayMarkers(map)
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
 
 function createStartMarker(map, latlng, title) {
     return new google.maps.Marker({

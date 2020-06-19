@@ -8,7 +8,7 @@ function initialize() {
     var mapCenterLatLng = shortestPathCoords[0]
     var mapOptions = {
         center: new google.maps.LatLng(mapCenterLatLng[0], mapCenterLatLng[1]),
-        zoom: 14,
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -36,4 +36,5 @@ function displayRoads(map) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
 

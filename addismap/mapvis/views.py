@@ -17,13 +17,15 @@ def mapapp(request):
     #node_set = select_nodes_in_rectangle(nodes, 9.00602,9.01380,38.75469,38.76639 )
     #dijkstra(adj_list, '1732976686', '1732976651')
     if request.method == 'GET':
+        message = request.session.get('message')
         context = {
-            'GMAPS_API_KEY': ''
+            'message':message,
+            'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q'
         }
 
     if request.method == 'POST':
     
-        osmPath = "/Users/yohannes/Developer/mapApp/addismap/mapvis/gerji"
+        osmPath = "/Users/yohannes/Developer/mapApp/addismap/mapvis/gerjisecond.osm"
 
         nodes = extract_osm_nodes(osmPath)
         nodes_values = list(nodes.get_nodes().values())
@@ -41,6 +43,12 @@ def mapapp(request):
         closestNodeToDestination = closestNodeTo(destinationNodeLatLng, nodes)
         
         shortestPath = dijkstra(adj_list, str(closestNodeToStart.id), str(closestNodeToDestination.id))
+        if len(shortestPath)==0:
+            request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes"
+            return redirect('/')
+        else:
+            request.session['message'] = None
+            
         shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
         print(shortestPath)
 
@@ -49,8 +57,6 @@ def mapapp(request):
 
         request.session['shortestPathCoords'] = jsonShortestPathCoords
         return redirect('/showpath/')
-
-        
 
     
     return render(request, 'mapvis/mapapp.html', context)
