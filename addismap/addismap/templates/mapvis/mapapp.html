@@ -21,41 +21,59 @@
         <script src="{% static '/js/map.js' %}"></script>
 
     </head>
-    <body>
-    <div class="container-fluid">
-        <div class="row" style="margin-top: 30px;">
-            <div class="col-sm-10">
-                <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: -80px;">
-                    <div id="map_canvas" class="embed-responsive-item"></div>
-                </div>
-            </div>
-        </div>
+    <body style="background-color: black;">
+        <header class="site-header">
+            <div>
+              <h1 style="font-weight: bold; color: whitesmoke;">Shortest Path Finder and Visualizer</h1>
+            </div>  
+          </header>
 
-        <div class="row">
-            <div class="col-sm-10">
+    <div class="container-fluid">
+        
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-sm-2">
                 <div>
-                    <form action="" method="POST" class="form-inline" role="form" id="latlngform">
+                    <form action="" method="POST" role="form" id="latlngform">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="start-latitude">Start Lat </label>
-                            <input type="number" step="any" class="form-control" name="start-latitude" id="start-latitude">
+                            <label for="start-latitude">Start Latitude</label>
+                            <input step="any" class="form-control" name="start-latitude" id="start-latitude" placeholder="Latitude">
                         </div>
                         <div class="form-group">
-                            <label for="start-longitude">Start Long</label>
-                            <input type="number" step="any" class="form-control" name="start-longitude" id="start-longitude">
+                            <label for="start-longitude">Start Longitude</label>
+                            <input step="any" class="form-control" name="start-longitude" id="start-longitude" placeholder="Longitude">
                         </div>
                         <div class="form-group">
-                            <label for="destination-latitude">Target Lat</label>
-                            <input type="number" step="any" class="form-control" name="destination-latitude" id="destination-latitude">
+                            <label for="destination-latitude">Target Latitude</label>
+                            <input step="any" class="form-control" name="destination-latitude" id="destination-latitude" placeholder="Latitude">
                         </div>
                         <div class="form-group">
-                            <label for="destination-longitude">Target Long</label>
-                            <input type="number" step="any" class="form-control" name="destination-longitude" id="destination-longitude">
+                            <label for="destination-longitude">Target Longitude</label>
+                            <input step="any" class="form-control" name="destination-longitude" id="destination-longitude" placeholder="Longitude">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <div>
+                            <label for="algorithm">Choose Algorithm: </label>
+                                <select id="algorithm" name="search-algo">
+                                    <option value="Dijkstra">Dijkstra</option>
+                                    <option value="A-Star">A Star (A*)</option>
+                                </select>
+                        </div>
+                        <div style="text-align: center;"><button type="submit" class="btn btn-default" style="margin-top: 10px; ;">Submit</button></div>
                     </form>
                 </div>
             </div>
+            <div class="col-sm-8">
+                <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 15px;">
+                    <div id="map_canvas" class="embed-responsive-item"></div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8"></div>
+            <div class="col-sm-2"></div>
         </div>
         {% if message != None %}
             <div style="font-weight: bold; margin-top: 10px;color:red;">{{message}}</div>

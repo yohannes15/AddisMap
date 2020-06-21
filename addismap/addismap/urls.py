@@ -22,8 +22,8 @@ from bobbin_lace.views import memb_reg
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mapapp),
-    path('showpath/', showPath),
+    path('', mapapp, name="index"),
+    path('showpath/', showPath, name="showpath"),
     #path('update', update),
     path('bobbin_lace', memb_reg)
 ]

@@ -19,4 +19,3 @@ class POST_parser:
         self.lng1 = get_float(request, 'start-longitude')
         self.lat2 = get_float(request, 'destination-latitude')
         self.lng2 = get_float(request, 'destination-longitude')
-    
