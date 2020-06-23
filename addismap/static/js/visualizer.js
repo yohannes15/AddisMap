@@ -222,12 +222,24 @@ $( "#clearBtn" ).click(function(){
 /* --- NAV BAR MENUS --- */
 /* --------------------- */
 
-$( "#algorithms .dropdown-item").click(function(){
+function startAlgorithm(algo){
+	console.log(algo)
 	if ( inProgress ){ update("wait"); return; }
-	algorithm = $(this).text();
+	algorithm = algo;
 	updateStartBtnText();
 	console.log("Algorithm has been changd to: " + algorithm);
-});
+}
+
+if ($( "#selected-algorithm").text()=='Dijkstra'){
+	startAlgorithm($( "#selected-algorithm").text())
+};
+
+// $( "#algorithms .dropdown-item").click(function(){
+// 	if ( inProgress ){ update("wait"); return; }
+// 	algorithm = $(this).text();
+// 	updateStartBtnText();
+// 	console.log("Algorithm has been changd to: " + algorithm);
+// });
 
 $( "#speed .dropdown-item").click(function(){
 	if ( inProgress ){ update("wait"); return; }
@@ -1194,6 +1206,3 @@ $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus');
 })
 
-$(window).on('load',function(){
-        $('#exampleModalLong').modal('show');
-});

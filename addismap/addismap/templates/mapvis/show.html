@@ -5,8 +5,6 @@
     <head>
         <meta name="viewport"content="initial-scale=1.0, user-scalable=no"/>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="{% static '/css/magic.min.css' %}">
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -15,6 +13,10 @@
             src="http://maps.googleapis.com/maps/api/js?key={{GMAPS_API_KEY}}&sensor=false">
         </script>
         <script src="https://kit.fontawesome.com/d1f3dd87b7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
         <script>
             var shortestPathCoords = {{SHORTEST_PATH_COORDS}}
             //console.log(shortestPath)
@@ -34,7 +36,7 @@
                     </form>
                 </div>
                 <div class="col-sm-4">
-                    <h1 style="align-content: center;" id="heading">Shortest Path Found!</h1>
+                    <h1 style="align-content: center;" class="heading">Shortest Path Found!</h1>
                 </div>
                 <div class="col-sm-4"></div>
             </div>
@@ -51,55 +53,38 @@
 
 
         <div class="container" style="margin-top:50px">
-            <h1 style="align-content: center;" id="heading">{{ALGORITHM}}</h1>
-            <div id="visualizer">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown" id="algorithms">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Algorithms
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">A*</a>
-                                <a class="dropdown-item" href="#">Dijkstra</a>
-                                <a class="dropdown-item" href="#">Greedy Best-First Search</a>
-                                <a class="dropdown-item" href="#">Breadth-First Search (BFS)</a>
-                                <a class="dropdown-item" href="#">Depth-First Search (DFS)</a>
-                                <a class="dropdown-item" href="#">Jump Point Search</a>
-                            </div>
-                            </li>
-                            <li class="nav-item dropdown" id="mazes">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Mazes
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Random</a>
-                                <a class="dropdown-item" href="#">Recursive Division</a>
-                                <a class="dropdown-item" href="#">Recursive Division (Vertical Skew)</a>
-                                <a class="dropdown-item" href="#">Recursive Division (Horizontal Skew)</a>
-                                <a class="dropdown-item" href="#">Simple Spiral</a>
-                            </div>
-                        </li>
-                            <li class="nav-item dropdown" id="speed">
-                                <a class="nav-link dropdown-toggle speedDisplay" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Speed: Fast
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Slow</a>
-                                <a class="dropdown-item" href="#">Normal</a>
-                                <a class="dropdown-item" href="#">Fast</a>
-                            </div>
-                        </li>
-                    </ul>
-
-                        <button class="btn btn-outline-success btn-space" type="submit" id="startBtn">Start</button>
-                        <button type="button" class="btn btn-outline-warning btn-space" type="submit" id="clearBtn">Clear Board</button>
-                        <!-- <button type="button" class="btn btn-outline-danger disabled" type="submit" id="stopBtn">Stop</button> -->
-                    </div>
-                </nav>
-            </div>
-
             <div class="row">
+                <div class="col-sm-6">
+                    <h1 id="selected-algorithm" style="text-align: right;" class="heading">{{ALGORITHM}}</h1>
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="heading" style="text-align:left;">Visualizer</h1>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-sm fixed-top " id="myNavbar">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown" id="mazes">
+                            <a class="btn btn-info" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create A Maze
+</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#myNavBar">Random</a>
+                              <a class="dropdown-item" href="#myNavBar">Recursive Division</a>
+                              <a class="dropdown-item" href="#myNavBar">Recursive Division (Vertical Skew)</a>
+                              <a class="dropdown-item" href="#myNavBar">Recursive Division (Horizontal Skew)</a>
+                              <a class="dropdown-item" href="#myNavBar">Simple Spiral</a>
+                          </div>
+                      </li>
+                       
+                  </ul>
+      
+                    <button class="start-button" type="submit" id="startBtn">Start</button>
+                    <button class="start-button" type="button" class="btn btn-outline-warning btn-space" type="submit" id="clearBtn">Clear Board</button>
+                    <!-- <button type="button" class="btn btn-outline-danger disabled" type="submit" id="stopBtn">Stop</button> -->
+            </div>
+           </nav>
+      
+           <div class="row">
                 <div class="col-sm-2">
                     <div class="key wall"></div>  
                     <div> Wall</div>
@@ -127,11 +112,17 @@
                 </div>
             </div>
 
-        </div>
-
-        <div class="d-flex flex-column align-items-center" id="bigTableContainer">
-            <div id="tableContainer"></div>
-            <!-- <div id="update">Click or drag cells to build walls. <br/>Press the 'Start' button when you finish and have selected an algorithm.</div> -->
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div class="d-flex flex-column align-items-center" id="bigTableContainer">
+                        <div id="tableContainer"></div>
+                        <!-- <div id="update">Click or drag cells to build walls. <br/>Press the 'Start' button when you finish and have selected an algorithm.</div> -->
+                     </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+           
         </div>
 
         <div class ="d-flex flex-column" id="results">
@@ -154,6 +145,6 @@
 <!-------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------------------------------------------------------------------------------------------->
-
+<!--!-->
 
 	

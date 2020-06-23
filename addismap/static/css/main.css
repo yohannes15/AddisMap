@@ -19,7 +19,7 @@ body {
     
 }
 
-#heading {
+.heading {
     text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     font-weight: bold;
@@ -83,6 +83,13 @@ select {
 #visualizer{
     margin-top: 60px;
 }
+
+.start-button {
+    background-color: tomato;
+    color: white;
+    font-size: 18px;
+}
+
 td {
     border: 1px solid #79d9ce;
     width: 20px;
@@ -172,6 +179,14 @@ ul {
 	font-size: 12px;
 	text-align: center;
 	border: 1px dashed black;
+}
+
+@media (min-width: 600px){
+    .navbar li {
+        font-size: 20px;
+        margin-left : 5em;
+        margin-right : 25em;
+    }
 }
 
 #resultsIcon {
