@@ -1,6 +1,7 @@
 from mapvis.store import NodeSet, Node
 from mapvis.algorithms import length_haversine
 import collections
+from collections import namedtuple
 import heapq
 
 class PriorityQueue:
@@ -32,18 +33,15 @@ def reconstruct_path(came_from, start, goal):
 def heuristic(goal, neighbor, allNodes):
     #cost in hours = distance / speed = km / (km/h)
     #find the nodeset item equal to the neighobr id
-    '''speedLimit = 70
-    cost = 0
-    for i,node in allNodes.nodes.items():
-        if int(neighbor) == int(node.id):
-            distance = length_haversine(goal, node)
-            cost = distance/speedLimit
-            return cost'''
-
-    return 0
+    node = namedtuple('Node', ['lat', 'lng'])
+    speedLimit = 70
+    neighborLatLng = node(allNodes.nodes[neighbor].lat, allNodes.nodes[neighbor].lng)
+    distance = length_haversine(goal, neighborLatLng)
+    return distance/speedLimit
 
 
 def a_star_search(graph, start, goal, allNodes): #start and goal have .lat, .lng and .id 
+    allNodes.print_node_set()
     frontier = PriorityQueue()
     frontier.put(str(start.id), 0)
     came_from = {}

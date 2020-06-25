@@ -34,7 +34,6 @@ def mapapp(request):
         nodes = extract_osm_nodes(osmPath)
         edges = extract_osm_edges(osmPath)
         adj_list = adjacency_list(nodes, edges)
-        print(adj_list)
         node = namedtuple('Node', ['lat', 'lng'])
 #####
         post = POST_parser(request)
@@ -42,6 +41,7 @@ def mapapp(request):
         destinationNodeLatLng = node(post.lat2, post.lng2)
         closestNodeToStart = closestNodeTo(startNodeLatLng,nodes)
         closestNodeToDestination = closestNodeTo(destinationNodeLatLng, nodes)
+
 
         shortestPath = []
         searchAlgorithm = request.POST.get('search-algo')
@@ -59,7 +59,6 @@ def mapapp(request):
             request.session['message'] = None
             request.session['algorithm'] = searchAlgorithm
         
-        print(shortestPath)
         shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
         #print(shortestPath)
 
