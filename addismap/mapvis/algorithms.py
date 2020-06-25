@@ -81,13 +81,3 @@ def shortestPathLatLng(shortestPath, AllNodeSet):
             if int(node.id) == int(nodeid):
                 shortestPathCoords.append([float(node.lat), float(node.lng)])
     return shortestPathCoords
-
-
-
-
-        
-
-
-
-
-

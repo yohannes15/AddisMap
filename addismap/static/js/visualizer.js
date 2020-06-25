@@ -234,6 +234,10 @@ if ($( "#selected-algorithm").text()=='Dijkstra'){
 	startAlgorithm($( "#selected-algorithm").text())
 };
 
+if ($( "#selected-algorithm").text()=='A-Star'){
+	startAlgorithm($( "#selected-algorithm").text())
+};
+
 // $( "#algorithms .dropdown-item").click(function(){
 // 	if ( inProgress ){ update("wait"); return; }
 // 	algorithm = $(this).text();
@@ -315,7 +319,7 @@ function updateStartBtnText(){
 		$("#startBtn").html("Start BFS");
 	} else if (algorithm == "Dijkstra"){
 		$("#startBtn").html("Start Dijkstra");
-	} else if (algorithm == "A*"){
+	} else if (algorithm == "A-Star"){
 		$("#startBtn").html("Start A*");
 	} else if (algorithm == "Greedy Best-First Search"){
 		$("#startBtn").html("Start Greedy BFS");
@@ -395,7 +399,7 @@ function executeAlgo(){
 		var pathFound = BFS();
 	} else if (algorithm == "Dijkstra"){
 		var pathFound = dijkstra();
-	} else if (algorithm == "A*"){
+	} else if (algorithm == "A-Star"){
 		var pathFound = AStar();
 	} else if (algorithm == "Greedy Best-First Search"){
 		var pathFound = greedyBestFirstSearch();

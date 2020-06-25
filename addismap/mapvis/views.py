@@ -5,6 +5,7 @@ from mapvis.parser import get_default_parser, print_osm_data
 from mapvis.extract import extract_osm_nodes, select_nodes_in_rectangle, extract_osm_edges
 from mapvis.adjacency import adjacency_list
 from mapvis.algorithms import dijkstra, closestNodeTo, shortestPathLatLng
+from mapvis.astar import a_star_search
 from mapvis.parser_POST import POST_parser
 from mapvis.forms import LatLongForm
 from django.conf import settings
@@ -33,6 +34,7 @@ def mapapp(request):
         nodes = extract_osm_nodes(osmPath)
         edges = extract_osm_edges(osmPath)
         adj_list = adjacency_list(nodes, edges)
+        print(adj_list)
         node = namedtuple('Node', ['lat', 'lng'])
 #####
         post = POST_parser(request)
@@ -43,8 +45,12 @@ def mapapp(request):
 
         shortestPath = []
         searchAlgorithm = request.POST.get('search-algo')
+        
         if searchAlgorithm == 'Dijkstra':
             shortestPath = dijkstra(adj_list, str(closestNodeToStart.id), str(closestNodeToDestination.id))
+        
+        elif searchAlgorithm == 'A-Star':
+            shortestPath = a_star_search(adj_list, closestNodeToStart, closestNodeToDestination, nodes)
 
         if len(shortestPath)==0:
             request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes"
@@ -52,12 +58,13 @@ def mapapp(request):
         else:
             request.session['message'] = None
             request.session['algorithm'] = searchAlgorithm
-            
-        shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
+        
         print(shortestPath)
+        shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
+        #print(shortestPath)
 
         jsonShortestPathCoords = json.dumps(shortestPathCoords)
-        print(jsonShortestPathCoords)
+        #print(jsonShortestPathCoords)
 
         request.session['shortestPathCoords'] = jsonShortestPathCoords
         return redirect('/showpath/')
