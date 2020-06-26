@@ -43,6 +43,17 @@ The data for this map is extracted from OpenStreetMap. If you would like to work
 * adjacency.py --> creates an adjacency list which represents the overall graph. It is a dictionary of dictionaries. 
 **FORMAT** is like this: {nodeID: {neighborNode: distance(using harversine formula), anotherNeighborNode: distance, ...}, nodeID: {neighborNode: distance, ...}}
 
+* algorithms.py --> has useful function such as harversine formula which finds the distance between two points on earth taking into account earth's curvature. It also has a closestNode finder which finds the closest Node to a chosen node. (This is helpful if someone selects a marker(node) that has no neighboring node. Instead of saying NO PATH FOUND, it would find the closet node to it and try to find a path based on that node). Also has Dijkstra path finding algorith
+
+* a_star.py --> Implementation of A Star Search using a heap based priority queue. **The herustic** is the distance from the target (destination) node. It is admissible and never overestimates, so it is pretty accurate and fast. I am looking for maybe a better herustic, and that is my next improvment for this algorithm.
+
+* extract.py --> Parses the supplied OSM file for extracting the nodes and the edges for the graph. 
+
+* parser.py --> a class that can parse OpenStreetMap Node-data and OpenStreetMap Way-data. There is a helper function for retrieving a default parser called get_default_parser(fname). It provides a basic parser that can iterate over nodes and iterate over ways If you want to tweak the behaviour of the default parser you can change the tags that will be returned with the tuples DEFAULT_NODE/WAY_TAGS under the Module Config-section
+
+The default parser will return edges with tags if they exist in "DEFAULT_WAY_TAGS". You can tweak the behaviour of the default parser so that it will return all tags it encounters. You do this by calling 'get_default_parser(fname, allow_all=True)'
+
+The only dependency of the module is the xml.etree.ElementTree which is a part of the python library for both py2 and py3
 
 
 
