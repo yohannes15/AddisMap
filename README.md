@@ -49,7 +49,7 @@ The data for this map is extracted from OpenStreetMap. If you would like to work
 
 * **extract.py** --> Parses the supplied OSM file for extracting the nodes and the edges for the graph. 
 
-* **parser.py** --> a class that can parse OpenStreetMap Node-data and OpenStreetMap Way-data. There is a helper function for retrieving a default parser called get_default_parser(fname). It provides a basic parser that can iterate over nodes and iterate over ways If you want to tweak the behaviour of the default parser you can change the tags that will be returned with the tuples DEFAULT_NODE/WAY_TAGS under the Module Config-section
+* **parser.py** --> **CREDIT TO: Henke Adolfsson** a class that can parse OpenStreetMap Node-data and OpenStreetMap Way-data. There is a helper function for retrieving a default parser called get_default_parser(fname). It provides a basic parser that can iterate over nodes and iterate over ways If you want to tweak the behaviour of the default parser you can change the tags that will be returned with the tuples DEFAULT_NODE/WAY_TAGS under the Module Config-section. 
 
   * The default parser will return edges with tags if they exist in "DEFAULT_WAY_TAGS". You can tweak the behaviour of the default parser so that it will return
   all tags it encounters. You do this by calling 'get_default_parser(fname, allow_all=True)'
