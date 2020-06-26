@@ -24,7 +24,7 @@ This application allows you to set two markers on the google map API (Start, Des
 
 After choosing the markers, the latitude and longitude are stores and you are able to set the path finding algorithm (Breadth First Search, Depth First Search, Dijkstra, Greedy First Search, A-Star...) and it will use that algorithm for you to find the path.
 
-![images/frontpage.jpg]
+![images/frontpage.png]
 
 
 
