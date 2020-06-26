@@ -24,7 +24,7 @@ After choosing the markers, the latitude and longitude are stored and you are ab
 
 **If you scroll down, you can also see a visualizer of the algorithm! I feel that the visualizers are really important for understanding how these algorithms work. You can set mazes, block walls and understand how an algorithm finds the shortest path.
 
-![](images/visualizer.gif)
+<div align=”center”>![](images/visualizer.gif)</div>
 
 
 
