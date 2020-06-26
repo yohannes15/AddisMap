@@ -22,9 +22,30 @@ After choosing the markers, the latitude and longitude are stored and you are ab
 
 ![](images/path.png)
 
-**If you scroll down, you can also see a visualizer of the algorithm! I feel that the visualizers are really important for understanding how these algorithms work. You can set mazes, block walls and understand how an algorithm finds the shortest path.
+**If you scroll down, you can also see a visualizer of the algorithm! I feel that the visualizers are really important for understanding how these algorithms work. You can set mazes, block walls and understand how an algorithm finds the shortest path.**
 
 ![](images/visualizer.gif)
+
+## HOW TO CLONE AND USE THIS PROJECT:
+
+* Clone this project (https://github.com/yohannes15/AddisMap.git)
+* Make sure to have Python Installed (Python3 preferably)
+* Make sure to have Django Installed (Django 3.0.7 preferably)
+* Make sure to have a Google API Key in order to work with Google Javascript Map API that is being used on this project. After getting the key, go to the mapvis/views.py file and change the GMAPS_KEY in the contexts of all the views which make use of the map.
+* You basically have a working project now.
+
+## THE DATA
+
+The data for this map is extracted from OpenStreetMap. If you would like to work with a different part of the world/city/neighborhood, you need to extract it from OpenStreetMap and change the gerji.OSM file. If you are going to download a very metropoltian area such as New York or any other major city, just know that the most of the algorithms will take a much longer time. The Gerji.OSM file I have has over 100,000 nodes and it takes a couple seconds for the algorithm to run on the slower path finding algorithms. So just be mindful of that!
+
+## FILES (Described)
+
+* adjacency.py --> creates an adjacency list which represents the overall graph. It is a dictionary of dictionaries. 
+**FORMAT** is like this: {nodeID: {neighborNode: distance(using harversine formula), anotherNeighborNode: distance, ...}, nodeID: {neighborNode: distance, ...}}
+
+
+
+
 
 
 
