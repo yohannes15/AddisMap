@@ -2,7 +2,7 @@
 
 # Introduction
 
-This project was inspired by my desire to learn different path finding algorithms. I was really interested and drawn by the enormous applications of path finding algorithms and the different varieties of these types of algorithms. I was inspired by my desire to learn an application of path finding algorithms in Navigation through actual application. 
+This project was inspired by my desire to learn different path finding algorithms. I was really interested and drawn by the enormous applications of path finding algorithms and the different varieties of these types of algorithms.
 
 Pathfinding algorithms are usually an attempt to solve the shortest path problem in graph theory. They try to find the best path given a starting point and ending point based on some predefined criteria. In graph theory, the shortest path problem is the problem of finding a path between two vertices (or nodes) in a graph such that the sum of the weights of its constituent edges is minimized. In the case of unweighted graphs, this isn't really important.
 
