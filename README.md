@@ -18,6 +18,14 @@ After choosing the markers, the latitude and longitude are stored and you are ab
 
 ![](images/frontpage.png)
 
+**Example Path Finding Using Dijkstra's Algorithm**
+
+![](images/path.png)
+
+**If you scroll down, you can also see a visualizer of the algorithm! I feel that the visualizers are really important for understanding how these algorithms work. You can set mazes, block walls and understand how an algorithm finds the shortest path.
+
+![](images/visualizer.gif)
+
 
 
 
