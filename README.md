@@ -38,7 +38,7 @@ After choosing the markers, the latitude and longitude are stored and you are ab
 
 The data for this map is extracted from OpenStreetMap. If you would like to work with a different part of the world/city/neighborhood, you need to extract it from OpenStreetMap and change the gerji.OSM file. If you are going to download a very metropoltian area such as New York or any other major city, just know that the most of the algorithms will take a much longer time. The Gerji.OSM file I have has over 100,000 nodes and it takes a couple seconds for the algorithm to run on the slower path finding algorithms. So just be mindful of that!
 
-## FILES (Described)
+## FILES
 
 * **adjacency.py** --> creates an adjacency list which represents the overall graph. It is a dictionary of dictionaries. 
 **FORMAT** is like this: {nodeID: {neighborNode: distance(using harversine formula), anotherNeighborNode: distance, ...}, nodeID: {neighborNode: distance, ...}}
@@ -53,8 +53,13 @@ The data for this map is extracted from OpenStreetMap. If you would like to work
 
   * The default parser will return edges with tags if they exist in "DEFAULT_WAY_TAGS". You can tweak the behaviour of the default parser so that it will return
   all tags it encounters. You do this by calling 'get_default_parser(fname, allow_all=True)'
+  
+* **store.py** --> Defines the classes for how the Nodes and Edges are represented and stored.
 
-The only dependency of the module is the xml.etree.ElementTree which is a part of the python library for both py2 and py3
+* **tests.py** --> Unit tests. Right now, it is only a test class for the Nodes and Edges, but I am working on adding as much tests as possible for the algorithms.
+
+**THE OTHER FILES ARE DJANGO SPECIFIC APPS, WHICH YOU CAN LEARN FROM THE WONDERFUL DJANGO DOCS. **
+
 
 
 
