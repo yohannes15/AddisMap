@@ -17,11 +17,6 @@ import os, json
 
 # Create your views here.
 def mapapp(request):
-    #node_set = select_nodes_in_rectangle(nodes, 9.00602,9.01380,38.75469,38.76639 )
-    #dijkstra(adj_list, '1732976686', '1732976651')
-    #nodes_json = json.dumps([node.__dict__ for node in nodes_values], cls=DjangoJSONEncoder)
-    #nodes_values = list(nodes.get_nodes().values())
-    
     if request.method == 'GET':
         message = request.session.get('message')
         request.session['algorithms'] = None
@@ -61,7 +56,7 @@ def mapapp(request):
             shortestPath = greedy_search(adj_list, closestNodeToStart, closestNodeToDestination, nodes)
 
         if len(shortestPath)==0:
-            request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes"
+            request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes. The Open Street Map data for Addis Ababa, Ethiopia (Gerji Specifically Here) isn't completely filled with all the nodes as accurately as other modern cities."
             return redirect('/')
         else:
             request.session['message'] = None
@@ -82,6 +77,7 @@ def mapapp(request):
 
 def showPath(request):
     shortestPathCoords = request.session.get('shortestPathCoords')
+    print(shortestPathCoords)
     algorithm = request.session.get('algorithm')
     context = {
         'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q',

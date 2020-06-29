@@ -22,10 +22,8 @@
 
     </head>
     <body style="background-color: black;">
-        <header class="site-header">
-            <div>
-              <h1 style="font-weight: bold; color: whitesmoke;">Shortest Path Finder and Visualizer</h1>
-            </div>  
+        <header>
+            <div style="background-color:coral" class="heading">Shortest Path Finder and Visualizer</div>  
           </header>
 
     <div class="container-fluid">
@@ -74,12 +72,14 @@
 
         <div class="row">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8"></div>
+            <div class="col-sm-8">
+                {% if message != None %}
+                    <div style="font-size:20px; font-weight: bold; margin-top: 10px;color:salmon;">{{message}}</div>
+                {% endif %}
+            </div>
             <div class="col-sm-2"></div>
         </div>
-        {% if message != None %}
-            <div style="font-weight: bold; margin-top: 10px;color:red;">{{message}}</div>
-        {% endif %}
+        
         </div>
 
         

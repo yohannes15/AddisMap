@@ -62,6 +62,9 @@ def a_star_search(graph, start, goal, allNodes): #start and goal have .lat, .lng
                 priority = new_cost + heuristic(goal, neighbor, allNodes)
                 frontier.put(neighbor, priority)
                 came_from[neighbor] = current
+
+    if str(goal.id) not in came_from:
+        return []
     
     path = reconstruct_path(came_from, str(start.id), str(goal.id))
     return path
