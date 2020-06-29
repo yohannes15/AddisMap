@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from mapvis.store import Node, NodeSet
 from mapvis.parser import get_default_parser, print_osm_data
-from mapvis.extract import extract_osm_nodes, select_nodes_in_rectangle, extract_osm_edges
+from mapvis.extract import extract_osm_nodes, extract_osm_edges
 from mapvis.adjacency import adjacency_list
-from mapvis.algorithms import dijkstra, closestNodeTo, shortestPathLatLng
+from mapvis.algorithms import closestNodeTo, shortestPathLatLng
+from mapvis.dijkstra import dijkstra
+from mapvis.bfs import breadth_first_search
+from mapvis.greedysearch import greedy_search
 from mapvis.astar import a_star_search
 from mapvis.parser_POST import POST_parser
-from mapvis.forms import LatLongForm
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from collections import namedtuple
@@ -51,6 +53,12 @@ def mapapp(request):
         
         elif searchAlgorithm == 'A-Star':
             shortestPath = a_star_search(adj_list, closestNodeToStart, closestNodeToDestination, nodes)
+        
+        elif searchAlgorithm == 'Breadth-First Search (BFS)':
+            shortestPath = breadth_first_search(adj_list, closestNodeToStart, closestNodeToDestination)
+
+        elif searchAlgorithm == 'Greedy Best-First Search':
+            shortestPath = greedy_search(adj_list, closestNodeToStart, closestNodeToDestination, nodes)
 
         if len(shortestPath)==0:
             request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes"

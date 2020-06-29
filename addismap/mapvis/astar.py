@@ -41,7 +41,6 @@ def heuristic(goal, neighbor, allNodes):
 
 
 def a_star_search(graph, start, goal, allNodes): #start and goal have .lat, .lng and .id 
-    allNodes.print_node_set()
     frontier = PriorityQueue()
     frontier.put(str(start.id), 0)
     came_from = {}
@@ -65,7 +64,6 @@ def a_star_search(graph, start, goal, allNodes): #start and goal have .lat, .lng
                 came_from[neighbor] = current
     
     path = reconstruct_path(came_from, str(start.id), str(goal.id))
-    print(path)
     return path
 
 

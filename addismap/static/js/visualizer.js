@@ -238,6 +238,14 @@ if ($( "#selected-algorithm").text()=='A-Star'){
 	startAlgorithm($( "#selected-algorithm").text())
 };
 
+if ($( "#selected-algorithm").text()=='A-Star'){
+	startAlgorithm($( "#selected-algorithm").text())
+};
+
+if ($( "#selected-algorithm").text()=='Greedy Best-First Search'){
+	startAlgorithm($( "#selected-algorithm").text())
+};
+
 // $( "#algorithms .dropdown-item").click(function(){
 // 	if ( inProgress ){ update("wait"); return; }
 // 	algorithm = $(this).text();
@@ -252,21 +260,9 @@ $( "#speed .dropdown-item").click(function(){
 	console.log("Speed has been changd to: " + animationSpeed);
 });
 
-$( "#mazes .dropdown-item").click(function(){
+$( "#mazes").click(function(){
 	if ( inProgress ){ update("wait"); return; }
-	maze = $(this).text();
-	if (maze == "Random"){
-		randomMaze();
-	} else if (maze == "Recursive Division"){
-		recursiveDivMaze(null);
-	} else if (maze == "Recursive Division (Vertical Skew)"){
-		recursiveDivMaze("VERTICAL");
-	} else if (maze == "Recursive Division (Horizontal Skew)"){
-		recursiveDivMaze("HORIZONTAL");
-	} else if (maze == "Simple Spiral"){
-		spiralMaze();
-	}
-	console.log("Maze has been changd to: " + maze);
+	recursiveDivMaze(null);
 });
 
 /* ----------------- */
@@ -313,18 +309,14 @@ function updateSpeedDisplay(){
 }
 
 function updateStartBtnText(){
-	if (algorithm == "Depth-First Search (DFS)"){
-		$("#startBtn").html("Start DFS");
-	} else if (algorithm == "Breadth-First Search (BFS)"){
+	if (algorithm == "Breadth-First Search (BFS)"){
 		$("#startBtn").html("Start BFS");
 	} else if (algorithm == "Dijkstra"){
 		$("#startBtn").html("Start Dijkstra");
 	} else if (algorithm == "A-Star"){
 		$("#startBtn").html("Start A*");
 	} else if (algorithm == "Greedy Best-First Search"){
-		$("#startBtn").html("Start Greedy BFS");
-	} else if (algorithm == "Jump Point Search"){
-		$("#startBtn").html("Start JPS");
+		$("#startBtn").html("Start Greedy");
 	}
 	return;
 }
@@ -392,10 +384,7 @@ async function traverseGraph(algorithm){
 }
 
 function executeAlgo(){
-	if (algorithm == "Depth-First Search (DFS)"){
-		var visited = createVisited();
-		var pathFound = DFS(startCell[0], startCell[1], visited);
-	} else if (algorithm == "Breadth-First Search (BFS)"){
+	if (algorithm == "Breadth-First Search (BFS)"){
 		var pathFound = BFS();
 	} else if (algorithm == "Dijkstra"){
 		var pathFound = dijkstra();
@@ -403,8 +392,6 @@ function executeAlgo(){
 		var pathFound = AStar();
 	} else if (algorithm == "Greedy Best-First Search"){
 		var pathFound = greedyBestFirstSearch();
-	} else if (algorithm == "Jump Point Search"){
-		var pathFound = jumpPointSearch();
 	}
 	return pathFound;
 }
@@ -442,32 +429,6 @@ function cellIsAWall(i, j, cells){
 	return $(cells[cellNum]).hasClass("wall");
 }
 
-// Make it iterable?
-function DFS(i, j, visited){
-	if (i == endCell[0] && j == endCell[1]){
-		cellsToAnimate.push( [[i, j], "success"] );
-		return true;
-	}
-	visited[i][j] = true;
-	cellsToAnimate.push( [[i, j], "searching"] );
-	var neighbors = getNeighbors(i, j);
-	for(var k = 0; k < neighbors.length; k++){
-		var m = neighbors[k][0];
-		var n = neighbors[k][1]; 
-		if ( !visited[m][n] ){
-			var pathFound = DFS(m, n, visited);
-			if ( pathFound ){
-				cellsToAnimate.push( [[i, j], "success"] );
-				return true;
-			} 
-		}
-	}
-	cellsToAnimate.push( [[i, j], "visited"] );
-	return false;
-}
-
-
-// NEED TO REFACTOR AND MAKE LESS LONG
 function BFS(){
 	var pathFound = false;
 	var myQueue = new Queue();
@@ -643,196 +604,6 @@ function AStar() {
 		}
 	}
 	return pathFound;
-}
-
-function jumpPointSearch() {
-	var pathFound = false;
-	var myHeap = new minHeap();
-	var prev = createPrev();
-	var distances = createDistances();
-	var costs = createDistances();
-	var visited = createVisited();
-	var walls = createVisited();
-	distances[ startCell[0] ][ startCell[1] ] = 0;
-	costs[ startCell[0] ][ startCell[1] ] = 0;
-	myHeap.push([0, [startCell[0], startCell[1]]]);
-	cellsToAnimate.push([[startCell[0], startCell[1]], "searching"]);
-	while (!myHeap.isEmpty()){
-		var cell = myHeap.getMin();
-		var i = cell[1][0];
-		var j = cell[1][1];
-		if (visited[i][j]){ continue; }
-		visited[i][j] = true;
-		cellsToAnimate.push([[i, j], "visited"]);
-		if (i == endCell[0] && j == endCell[1]){
-			pathFound = true;
-			break;
-		}
-		var neighbors = pruneNeighbors(i, j, visited, walls);
-		for (var k = 0; k < neighbors.length; k++){
-			var m = neighbors[k][0];
-			var n = neighbors[k][1];
-			if (visited[m][n]){ continue; }
-			var newDistance = distances[i][j] + Math.abs(i - m) + Math.abs(j - n);
-			if (newDistance < distances[m][n]){
-				distances[m][n] = newDistance;
-				prev[m][n] = [i, j];
-				cellsToAnimate.push( [[m, n], "searching"] );
-			}
-			var newCost = distances[i][j] + Math.abs(endCell[0] - m) + Math.abs(endCell[1] - n);
-			if (newCost < costs[m][n]){
-				costs[m][n] = newCost;
-				myHeap.push([newCost, [m, n]]);
-			}
-		}
-	}
-	// Make any nodes still in the heap "visited"
-	while ( !myHeap.isEmpty() ){
-		var cell = myHeap.getMin();
-		var i = cell[1][0];
-		var j = cell[1][1];
-		if (visited[i][j]){ continue; }
-		visited[i][j] = true;
-		cellsToAnimate.push( [[i, j], "visited"] );
-	}
-	// If a path was found, illuminate it:
-	if (pathFound) {
-		var i = endCell[0];
-		var j = endCell[1];
-		cellsToAnimate.push( [endCell, "success"] );
-		while (prev[i][j] != null){
-			var prevCell = prev[i][j];
-			x = prevCell[0];
-			y = prevCell[1];
-			// Loop through and illuminate each cell in between [i, j] and [x, y]
-			// Horizontal
-			if ((i - x) == 0){
-				// Move right
-				if (j < y){
-					for (var k = j; k < y; k++){
-						cellsToAnimate.push( [[i, k], "success"] );
-					}
-				// Move left
-				} else {
-					for (var k = j; k > y; k--){
-						cellsToAnimate.push( [[i, k], "success"] );
-					}
-				}
-			// Vertical
-			} else {
-				// Move down
-				if (i < x){
-					for (var k = i; k < x; k++){
-						cellsToAnimate.push( [[k, j], "success"] );
-					}
-				// Move up
-				} else {
-					for (var k = i; k > x; k--){
-						cellsToAnimate.push( [[k, j], "success"] );
-					}
-				}
-			}
-			i = prevCell[0];
-			j = prevCell[1];
-			cellsToAnimate.push( [[i, j], "success"] );
-		}
-	}
-	return pathFound;
-}
-
-function pruneNeighbors(i, j, visited, walls){
-	var neighbors = [];
-	var stored = {};
-	// Scan horizontally
-	for (var num = 0; num < 2; num++){
-		if (!num){
-			var direction = "right";
-			var increment = 1;
-		} else {
-			var direction = "left";
-			var increment = -1;
-		}
-		for (var c = j + increment; (c < totalCols) && (c >= 0); c += increment){
-			var xy = i + "-" + c;
-			if (visited[i][c]){	break; }
-			//Check if same row or column as end cell
-			if ((endCell[0] == i || endCell[1] == c) && !stored[xy]){
-				neighbors.push([i, c]);
-				stored[xy] = true;
-				continue;
-			}
-			// Check if dead end
-			var deadEnd = !(xy in stored) && ((direction == "left" && (c > 0) && walls[i][c - 1]) || (direction == "right" && c < (totalCols - 1) && walls[i][c + 1]) || (c == totalCols - 1) || (c == 0));  
-			if (deadEnd){
-				neighbors.push([i, c]);
-				stored[xy] = true;
-				break;
-			}
-			//Check for forced neighbors
-			var validForcedNeighbor = (direction == "right" && c < (totalCols - 1) && (!walls[i][c + 1])) || (direction == "left" && (c > 0) && (!walls[i][c - 1]));
-			if (validForcedNeighbor){
-				checkForcedNeighbor(i, c, direction, neighbors, walls, stored);
-			}
-		}
-	}
-	// Scan vertically
-	for (var num = 0; num < 2; num++){
-		if (!num){
-			var direction = "down";
-			var increment = 1;
-		} else {
-			var direction = "up";
-			var increment = -1;
-		}
-		for (var r = i + increment; (r < totalRows) && (r >= 0); r += increment){
-			var xy = r + "-" + j;
-			if (visited[r][j]){	break; }
-			if ((endCell[0] == r || endCell[1] == j) && !stored[xy]){
-				neighbors.push([r, j]);
-				stored[xy] = true;
-				continue;
-			}
-			// Check if dead end
-			var deadEnd = !(xy in stored) && ((direction == "up" && (r > 0) && walls[r - 1][j]) || (direction == "down" && r < (totalRows - 1) && walls[r + 1][j]) || (r == totalRows - 1) || (r == 0));  
-			if (deadEnd){
-				neighbors.push([r, j]);
-				stored[xy] = true;
-				break;
-			}
-			//Check for forced neighbors
-			var validForcedNeighbor = (direction == "down" && (r < (totalRows - 1)) && (!walls[r + 1][j])) || (direction == "up" && (r > 0) && (!walls[r - 1][j]));
-			if (validForcedNeighbor){
-				checkForcedNeighbor(r, j, direction, neighbors, walls, stored);
-			}
-		}
-	}
-	return neighbors;
-}
-
-function checkForcedNeighbor(i, j, direction, neighbors, walls, stored){
-	//console.log(JSON.stringify(walls));
-	if (direction == "right"){
-		var isForcedNeighbor = ((i > 0) && walls[i - 1][j] && (!walls[i - 1][j + 1])) || ((i < (totalRows - 1)) &&  walls[i + 1][j] && (!walls[i + 1][j + 1]));
-		var neighbor = [i, j + 1];
-	} else if (direction == "left"){
-		var isForcedNeighbor = ((i > 0) && walls[i - 1][j] && !walls[i - 1][j - 1]) || ((i < (totalRows - 1)) && walls[i + 1][j] && !walls[i + 1][j - 1]);
-		var neighbor = [i, j - 1];
-	} else if (direction == "up"){
-		var isForcedNeighbor = ((j < (totalCols - 1)) && walls[i][j + 1] && !walls[i - 1][j + 1]) || ((j > 0) && walls[i][j - 1] && !walls[i - 1][j - 1]);
-		var neighbor = [i - 1, j];
-	} else {
-		var isForcedNeighbor = ((j < (totalCols - 1)) && walls[i][j + 1] && !walls[i + 1][j + 1]) || ((j > 0) && walls[i][j - 1] && !walls[i + 1][j - 1]);
-		var neighbor = [i + 1, j];
-	}
-	var xy = neighbor[0] + "-" + neighbor[1];
-	if (isForcedNeighbor && !stored[xy]){
-		//console.log("Neighbor " + JSON.stringify(neighbor) + " is forced! Adding to neighbors and stored.")
-		neighbors.push(neighbor);
-		stored[xy] = true;
-	} else {
-		//console.log("Is not a forced neighbor..");
-	}
-	//return;
 }
 
 function greedyBestFirstSearch() {
@@ -1142,49 +913,21 @@ async function animateCells(){
 	//console.log("End of animation has been reached!");
 	return new Promise(resolve => resolve(true));
 }
-/*
-async function flash(color){
-	var item = "#logo";
-	var originalColor = $(item).css("color");
-	if (color == "green"){
-		var colorRGB = '40,167,50';
-	} else if (color == "red"){
-		var colorRGB = '255,0,0';
-	}
-	var delay = 1; //ms
-	for (var i = 0.45; i <= 2.6; i += 0.01){
-    	$(item).css("color", 'rgba(' + colorRGB + ','+Math.abs(Math.sin(i))+')');
-		await new Promise(resolve => setTimeout(resolve, delay));
-	}
-	$(item).css("color", originalColor);
-	return new Promise(resolve => resolve(true));
-}
-*/
 
 function getDelay(){
 	var delay;
 	if (animationSpeed === "Slow"){
-		if (algorithm == "Depth-First Search (DFS)") {
-			delay = 25;
-		} else {
 			delay = 20;
-		}
 	} else if (animationSpeed === "Normal") {
-		if (algorithm == "Depth-First Search (DFS)") {
-			delay = 15;
-		} else {
 			delay = 10;
-		}
 	} else if (animationSpeed == "Fast") {
-		if (algorithm == "Depth-First Search (DFS)") {
-			delay = 10;
-		} else {
 			delay = 5;
-		}
 	}
 	console.log("Delay = " + delay);
 	return delay;
-}
+	}
+	
+
 
 function clearBoard( keepWalls ){
 	var cells = $("#tableContainer").find("td");

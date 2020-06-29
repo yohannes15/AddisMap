@@ -12,15 +12,6 @@ def extract_osm_nodes(f_name):
 
     return node_set
 
-def select_nodes_in_rectangle(nodes, min_lat, max_lat, min_lng, max_lng):
-    nodes_in_rectangle = NodeSet()
-    for k, node in nodes.get_nodes().items():
-        if(float(min_lat)< float(node.lat) and float(node.lat) < float(max_lat) and float(min_lng)< float(node.lng) and \
-            float(node.lng)<float(max_lng)):
-            nodes_in_rectangle.add(k, node.lat, node.lng)
-    
-    return nodes_in_rectangle
-
 def extract_osm_edges(f_name):
     # Parse the supplied OSM file
     print("Loading the data")

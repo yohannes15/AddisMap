@@ -1,6 +1,6 @@
 from mapvis.store import Node, NodeSet, Edge, EdgeSet
 from mapvis.parser import get_default_parser, print_osm_data
-from mapvis.extract import extract_osm_nodes, select_nodes_in_rectangle, extract_osm_edges
+from mapvis.extract import extract_osm_nodes, extract_osm_edges
 from mapvis.algorithms import length_haversine
 
 def adjacency_list(nodes, edges): #edges is edge_set.get_edges() which is a dictionary 

@@ -67,18 +67,18 @@ label.light {
 select {
     height: 32px;
     border-radius: 2px;
-    text-align-last:right;
-    padding-right: 120px;
+    text-align-last:left;
+    padding-right: 60px;
   }
 
-  .site-header { 
+.site-header { 
     border-bottom: 1px solid #ccc; 
     padding-bottom: 10px;
     text-align: center;
     font-family: 'Vollkorn', serif;;
     font-weight:bold;
     background-color: black;
-  }
+}
 
 #visualizer{
     margin-top: 60px;
@@ -157,7 +157,8 @@ ul {
 }
 
 #bigTableContainer {
-	margin-top: 30px;
+    margin-top: 30px;
+    margin-bottom:25px
 }
 
 .custom-section {
