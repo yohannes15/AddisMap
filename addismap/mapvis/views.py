@@ -56,7 +56,7 @@ def mapapp(request):
             shortestPath = greedy_search(adj_list, closestNodeToStart, closestNodeToDestination, nodes)
 
         if len(shortestPath)==0:
-            request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes. The Open Street Map data for Addis Ababa, Ethiopia (Gerji Specifically Here) isn't completely filled with all the nodes as accurately as other modern cities."
+            request.session['message'] = "Sorry Couldn't Find Path. Please try different nodes. The Open Street Map data for Addis Ababa, Ethiopia (Gerji) isn't completely filled with all the nodes as accurately as other modern cities."
             return redirect('/')
         else:
             request.session['message'] = None
