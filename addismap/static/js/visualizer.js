@@ -321,40 +321,6 @@ function updateStartBtnText(){
 	return;
 }
 
-// Used to display error messages
-function update(message){
-	$("#resultsIcon").removeClass();
-	$("#resultsIcon").addClass("fas fa-exclamation");
-	$('#results').css("background-color", "#ffc107");
-	$("#length").text("");
-	if (message == "wait"){
-		$("#duration").text("Please wait for the algorithm to finish.");
-	}
-}
-
-// Used to display results
-function updateResults(duration, pathFound, length){
-	var firstAnimation = "swashOut";
-	var secondAnimation = "swashIn";
-	$("#results").removeClass();
-    $("#results").addClass("magictime " + firstAnimation); 
-    setTimeout(function(){ 
-    	$("#resultsIcon").removeClass();
-    	//$("#results").css("height","80px");
-    	if (pathFound){
-    		$('#results').css("background-color", "#77dd77");
-    		$("#resultsIcon").addClass("fas fa-check");
-    	} else {
-    		$('#results').css("background-color", "#ff6961");
-    		$("#resultsIcon").addClass("fas fa-times");
-    	}
-    	$("#duration").text("Duration: " + duration + " ms");
-    	$("#length").text("Length: " + length);
-    	$('#results').removeClass(firstAnimation);
-    	$('#results').addClass(secondAnimation); 
-    }, 1100);
-}
-
 // Counts length of success
 function countLength(){
 	var cells = $("td");
@@ -374,11 +340,6 @@ async function traverseGraph(algorithm){
 	var pathFound = executeAlgo();
 	var endTime = Date.now();
 	await animateCells();
-	if ( pathFound ){ 
-		updateResults((endTime - startTime), true, countLength());
-	} else {
-		updateResults((endTime - startTime), false, countLength());
-	}
 	inProgress = false;
 	justFinished = true;
 }

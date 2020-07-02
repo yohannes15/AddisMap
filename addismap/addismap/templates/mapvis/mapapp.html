@@ -22,13 +22,22 @@
 
     </head>
     <body style="background-color: black;">
-        <header>
-            <div style="background-color:coral" class="heading">Shortest Path Finder and Visualizer</div>  
-          </header>
-
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div style="margin-top: 10px;"class="col-sm-8">
+                    <div class="heading">Shortest Path Finder and Visualizer</div>  
+                </div>
+                <div class="col-sm-2">
+                    <form>
+                        <button id="back" style="margin-top: 20px; font-size: 22px;"class="follow-button" formaction="{% url 'index' %}">The Algorithms</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     <div class="container-fluid">
         
-        <div class="row" style="margin-top: 30px;">
+        <div class="row" style="margin-top: 20px;">
             <div class="col-sm-2">
                 <div>
                     <form action="" method="POST" role="form" id="latlngform">
@@ -79,8 +88,32 @@
             </div>
             <div class="col-sm-2"></div>
         </div>
-        
+
+        <div style="background-color:rebeccapurple" class="heading">Instructions</div>
+
+
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <ol class="steps">
+                    <li><p>Click on the map to set the start and end destination. The start is symboled with a (S) on the map, while the destination is symboled with a flag. The form on the left hand side will automatically fill when selecting the start and destination markers</p></li>
+                    <li><p>Select your chosen path finding algorithm from the dropdown </p></li>
+                    <li><p>Click Submit and you will be redirected to a page which shows: </p></li>
+                        <ul style="font-size: 26px;">
+                            <li>--> Shortest Path Calcuated Using the Algorithm</li></span>
+                            <li>--> Visualizer for The algorithm</li>
+                            <li>--> Comaparison of Path To Google Directions API Path</li>
+                        </ul>
+
+                    
+                </ol>
+
+            </div>
+            <div class="col-sm-2"></div>
         </div>
+        
+    </div>
 
         
       </div>

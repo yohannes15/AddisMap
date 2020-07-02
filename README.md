@@ -2,29 +2,45 @@
 
 # Introduction
 
-This project was inspired by my desire to learn different path finding algorithms. I was really interested and drawn by the enormous applications of path finding algorithms and the different varieties of these types of algorithms.
+This project was inspired by my desire to learn different path finding algorithms.
 
-Pathfinding algorithms are usually an attempt to solve the shortest path problem in graph theory. They try to find the best path given a starting point and ending point based on some predefined criteria. In graph theory, the shortest path problem is the problem of finding a path between two vertices (or nodes) in a graph such that the sum of the weights of its constituent edges is minimized. In the case of unweighted graphs, this isn't really important.
+Pathfinding algorithms are an attempt to solve the shortest path problem in graph theory. They try to find the best path given a starting point and ending point based on some predefined criteria. In graph theory, the shortest path problem is the problem of finding a path between two vertices (or nodes) in a graph such that the sum of the weights of its constituent edges is minimized.
 
 I grew up in Addis Ababa, Ethiopia in the subcity Gerji. Growing up, I realized that people go around to places using landmarks such as historical buildings or statues... and nobody really uses nagivation or GPS on their map. This is in stark contrast to how people move around in New York City or any developed country. 
 
-There are a variety of reasons for why this is. First, **Internet in Ethiopia** is very expensive and most people can't afford to use their data on navigation. Second, the general population ***don't really have advanced smart phones*** as compared to US or Western Countires. And finally, the navigation apps such as Google Maps don't really give the shortest path as they rely mostly on roads and there are a majority of roads in Ethiopia that aren't recongized as roads and there are alot of shortcuts people use that don't appear on Google Maps.
+There are a variety of reasons for why this is. 
 
-## AddisMap Application
+First, **Internet in Ethiopia** is very expensive and most people can't afford to use their data on navigation and most people don't even have a smartphone.
 
-This application allows you to set two markers on the google map API (Start, Destination). The Markers are defined by (S) for the start and a (FLAG) for the destination. The scope of the map area is in the sub city (GERJI) I grew up in. 
+Second, the navigation apps such as Google Maps don't really give the shortest path as they rely mostly on roads and there are a majority of roads in Ethiopia that aren't recognized as roads and there are alot of shortcuts people use that don't appear on Google Maps.
+
+I created this app initally for the area where I grew up and went to school (Gerji, Addis Ababa). I wanted to see if the shortest path that was calculated was the path my parents and I usually used. 
+
+## Choosing The Marker
+
+![](images/instructions.png)
+
+This application allows you to set two markers on the google map API (Start, Destination). The Markers are defined by (S) for the start and a (FLAG) for the destination. The scope of the map area is in the sub city (GERJI) I grew up in. (I will add a couple other areas soon, ==> Queens, NY around St John's University and Berlin, Germany around Berlin International School)
 
 After choosing the markers, the latitude and longitude are stored and you are able to set the path finding algorithm (Breadth First Search, Depth First Search, Dijkstra, Greedy First Search, A-Star...) and it will use that algorithm for you to find the path.
 
 ![](images/frontpage.png)
 
-**Example Path Finding Using Dijkstra's Algorithm**
+## Shortest Path
+
+**Example Path Finding Using A-Star Algorithm**
 
 ![](images/path.png)
+
+## Visualizer
 
 **If you scroll down, you can also see a visualizer of the algorithm! I feel that the visualizers are really important for understanding how these algorithms work. You can set mazes, block walls and understand how an algorithm finds the shortest path.**
 
 ![](images/visualizer.gif)
+
+## Path Comparision To Google API Directions
+
+![](images/googlepath.png)
 
 ## HOW TO CLONE AND USE THIS PROJECT:
 
