@@ -30,7 +30,7 @@ After choosing the markers, the latitude and longitude are stored and you are ab
 
 **Example Path Finding Using A-Star Algorithm**
 
-![](images/path.png)
+![](images/shortestpath.png)
 
 ## Visualizer
 
