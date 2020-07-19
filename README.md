@@ -6,15 +6,9 @@ This project was inspired by my desire to learn different path finding algorithm
 
 Pathfinding algorithms are an attempt to solve the shortest path problem in graph theory. They try to find the best path given a starting point and ending point based on some predefined criteria. In graph theory, the shortest path problem is the problem of finding a path between two vertices (or nodes) in a graph such that the sum of the weights of its constituent edges is minimized.
 
-I grew up in Addis Ababa, Ethiopia in the subcity Gerji. Growing up, I realized that people go around to places using landmarks such as historical buildings or statues... and nobody really uses nagivation or GPS on their map. This is in stark contrast to how people move around in New York City or any developed country. 
+I grew up in Addis Ababa, Ethiopia in the subcity Gerji. Growing up, I realized that people go around to places using landmarks such as historical buildings or statues... and nobody really uses nagivation or GPS on their map. This is in stark contrast to how people move around in New York City or any developed city. 
 
-There are a variety of reasons for why this is. 
-
-First, **Internet in Ethiopia** is very expensive and most people can't afford to use their data on navigation and most people don't even have a smartphone.
-
-Second, the navigation apps such as Google Maps don't really give the shortest path as they rely mostly on roads and there are a majority of roads in Ethiopia that aren't recognized as roads and there are alot of shortcuts people use that don't appear on Google Maps.
-
-I created this app initally for the area where I grew up and went to school (Gerji, Addis Ababa). I wanted to see if the shortest path that was calculated was the path my parents and I usually used. 
+I created this app initally for the area where I grew up and went to school (Gerji, Addis Ababa). I wanted to see if the shortest path that was calculated was the path my parents and I usually used. Over time, I also added an area for Silver Spring MD (where my parents live)
 
 ## Choosing The Marker
 
