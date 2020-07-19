@@ -28,6 +28,7 @@ body {
     font-size: 50px;
     margin-bottom: 15px;
 }
+
 button {
     margin: 5px;
     cursor: pointer;
@@ -45,12 +46,15 @@ button:hover {
     box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.18);
     transform: translateY(-2px);
     transition: 0.25s;
+    background-color:whitesmoke;
+    color:black;
 }
     
 .follow-button {
     background-color: tomato;
     color: white;
 }
+
 
 label {
     display: block;

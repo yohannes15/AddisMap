@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from mapvis.views import mapapp
 from mapvis.views import showPath
+from mapvis.views import addisMapapp
 #from mapvis.views import update
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mapapp, name="index"),
     path('showpath/', showPath, name="showpath"),
+    path('gerji/', addisMapapp, name="addismap")
     #path('update', update),
 ]

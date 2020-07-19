@@ -1,3 +1,4 @@
+from collections import deque
 # returns a list with elements in order of the path
 # between the start and end of a graph
 # @param parent dict the mapping between node and parent
@@ -15,7 +16,7 @@ def backtrace(parent, start, end):
 # @param source int the source node to start the search
 # @param target int the target node to search for
 def dijkstra(graph, source, target):
-    queue = []
+    queue = deque([])
     visited = {}
     #distance = {}
     shortest_distance = {}
@@ -31,7 +32,7 @@ def dijkstra(graph, source, target):
     queue.append(source)
     #distance[source] = 0
     while len(queue) != 0:
-        current = queue.pop(0)
+        current = queue.popleft()
         visited[current] = True
         if current == target:
             shortest_path_to_target = backtrace(parent, source, target)

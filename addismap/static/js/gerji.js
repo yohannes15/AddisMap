@@ -1,12 +1,6 @@
-var map;
-var marker1;
-var marker2;
-var previousMarker;
-var clickCount = 0;
-
 function initialize() {
     var mapOptions = {
-        center: new google.maps.LatLng(39.0431,-76.9850),
+        center: new google.maps.LatLng(8.993029, 38.805703),
         zoom: 16,
         minZoom: 16,
         maxZoom: 16,
@@ -40,8 +34,8 @@ function initialize() {
     );
 
     var allowedBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(39.0419,-76.9866),
-        new google.maps.LatLng(39.0445, -76.9826) 
+        new google.maps.LatLng(8.989318, 38.793830),
+        new google.maps.LatLng(9.001513, 38.813769) 
     );
     var lastValidCenter = map.getCenter();
     
@@ -80,41 +74,6 @@ function createDestinationMarker(map, latlng, title) {
         icon: 'https://img.icons8.com/doodle/48/000000/finish-flag.png'
     });
 }
-
-
-// function displayMarkers(map) {
-//     COORDS.forEach(function(item){
-//         createMarker(map, new google.maps.LatLng(item.lat,item.lng), ""+item.id);
-//       });
-// }
-
-// document.getElementById('latlngform').onsubmit = function() {
-//     displayRoads(map)
-//     return false
-// }
-
-// $(document).on('submit', '#latlngform', function(e){
-//     e.preventDefault();
-
-//     $.ajax({
-//         type: 'POST',
-//         url: '/update',
-//         data: {
-//             allnodes:nodes,
-//             alledges:edges,
-//             startlatitude:$('#start-latitude').val(),
-//             startlongitude:$('#start-longitude').val(),
-//             destinationlatitude:$('#destination-latitude').val(),
-//             destinationlongitude:$('#destination-longitude').val(),
-//             csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-//         },
-//         success:function(){
-//             alert("Submitted");
-//         }
-//     });
-
-// });
-
 
 function createPolyline(map, path) {
     var polyline = new google.maps.Polyline({
