@@ -1,3 +1,9 @@
+var map;
+var marker1;
+var marker2;
+var previousMarker;
+var clickCount = 0;
+
 function initialize() {
     var mapOptions = {
         center: new google.maps.LatLng(8.993029, 38.805703),

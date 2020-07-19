@@ -104,13 +104,13 @@ select {
 }
 
 td {
-    border: 1px solid #79d9ce;
+    border: 1px solid beige;
     width: 20px;
     height: 20px;
 }
 
 .key {
-	border: 1px solid #79d9ce;
+	border: 1px solid beige;
 	width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -131,8 +131,8 @@ ul {
 
 .wall {
 	transition : background-color 0.1s ease-in-out;
-	background-color: #262b28;
-	border-color: #262b28;
+	background-color: whitesmoke;
+	border-color: whitesmoke;
 }
 
 .none {
@@ -149,8 +149,8 @@ ul {
 
 .visited {
 	transition : background-color 0.08s ease-in-out;
-	background-color: #e89440;
-	border-color: #e89440;
+	background-color: thistle;
+	border-color: thistle;
 }
 
 .success {
@@ -160,13 +160,13 @@ ul {
 }
 
 .start {
-	background-color: green;
-	border-color: green;
+	background-color: greenyellow;
+	border-color: greenyellow;
 }
 
 .end {
-	background-color: red;
-	border-color: red;
+	background-color:rebeccapurple;
+	border-color: rebeccapurple;
 }
 
 #bigTableContainer {

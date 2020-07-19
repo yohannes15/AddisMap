@@ -1,19 +1,6 @@
-//Things to do:
-// Add more algorithms (research)
-	// Bidirectional depth first search
-	// Bidirectional A*?
-	// Bidirectional breadth first search
-// Add more maze creation functions
-	// Do pure horizontal and pure vertical maze
-	// Do spiral maze from middle?
-/* ------------------------------------ */
-/* ---- Var Declarations & Preamble---- */
-/* ------------------------------------ */
-
 var totalRows = 25;
 var totalCols = 40;
 var inProgress = false;
-//var initialMessage = "Click or drag cells to build walls! Press start when you finish and have selected an algorithm!";
 var cellsToAnimate = [];
 var createWalls = false;
 var algorithm = null;
@@ -130,9 +117,6 @@ function minHeap() {
 	}
 }
 
-/* ------------------------- */
-/* ---- MOUSE FUNCTIONS ---- */
-/* ------------------------- */
 
 $( "td" ).mousedown(function(){
 	var index = $( "td" ).index( this );
@@ -202,9 +186,6 @@ $( "body" ).mouseup(function(){
 	movingEnd = false;
 });
 
-/* ----------------- */
-/* ---- BUTTONS ---- */
-/* ----------------- */
 
 $( "#startBtn" ).click(function(){
     if ( algorithm == null ){ return;}
@@ -218,9 +199,6 @@ $( "#clearBtn" ).click(function(){
 });
 
 
-/* --------------------- */
-/* --- NAV BAR MENUS --- */
-/* --------------------- */
 
 function startAlgorithm(algo){
 	console.log(algo)
