@@ -1,0 +1,139 @@
+{% load jsonify %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport"content="initial-scale=1.0, user-scalable=no"/>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?key={{GMAPS_API_KEY}}&sensor=false">
+        </script>
+        <script>
+            //console.log(shortestPath)
+            //console.log(nodes)
+        </script>
+        <script src="{% static '/js/gerji.js' %}"></script>
+
+    </head>
+    <body style="background-color: black;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div style="margin-top: 10px;"class="col-sm-8">
+                    <div class="heading">Shortest Path Finder and Visualizer</div>  
+                </div>
+                <div class="col-sm-2">
+                    <!-- <form>
+                        <button id="back" style="margin-top: 20px; font-size: 22px;"class="follow-button" formaction="{% url 'index' %}" onclick="">The Algorithms</button>
+                    </form> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div style="text-align: right;" class="col-sm-6">
+                    <form>
+                        <button id="back" style="margin-top: 20px; font-size: 22px;"class="follow-button" formaction="{% url 'index' %}">Silver Spring Maryland USA</button>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <form>
+                        <button id="back" style="margin-top: 20px; font-size: 22px;"class="follow-button" formaction="{% url 'addismap' %}">Gerji Addis Ababa Ethiopia</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <div class="container-fluid">
+        
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-2">
+                <div>
+                    <form action="" method="POST" role="form" id="latlngform">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="start-latitude">Start Latitude</label>
+                            <input step="any" class="form-control" name="start-latitude" id="start-latitude" placeholder="Latitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="start-longitude">Start Longitude</label>
+                            <input step="any" class="form-control" name="start-longitude" id="start-longitude" placeholder="Longitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="destination-latitude">Target Latitude</label>
+                            <input step="any" class="form-control" name="destination-latitude" id="destination-latitude" placeholder="Latitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="destination-longitude">Target Longitude</label>
+                            <input step="any" class="form-control" name="destination-longitude" id="destination-longitude" placeholder="Longitude">
+                        </div>
+                        <div>
+                            <label for="algorithm">Choose Algorithm: </label>
+                                <select id="algorithm" name="search-algo">
+                                    <option value="Dijkstra">Dijkstra</option>
+                                    <option value="A-Star">A Star (A*)</option>
+                                    <option value="Breadth-First Search (BFS)">Breadth-First Search</option>
+                                    <option value="Greedy Best-First Search">Greedy Best-First Search</option>
+                                </select>
+                        </div>
+                        <div style="text-align: center;"><button type="submit" class="btn btn-default" style="margin-top: 10px; ;">Submit</button></div>
+                    </form>
+                </div>
+            </div>
+            <div style="text-align: right;"class="col-sm-8">
+                <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 15px;">
+                    <div id="map_canvas" class="embed-responsive-item"></div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                {% if message != None %}
+                    <div style="font-size:20px; font-weight: bold; margin-top: 10px;color:salmon;">{{message}}</div>
+                {% endif %}
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div style="background-color:rebeccapurple" class="heading">Instructions</div>
+
+
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <ol class="steps">
+                    <li><p>Click on the map to set the start and end destination. The start is symboled with a (S) on the map, while the destination is symboled with a flag. The form on the left hand side will automatically fill when selecting the start and destination markers</p></li>
+                    <li><p>Select your chosen path finding algorithm from the dropdown </p></li>
+                    <li><p>Click Submit and you will be redirected to a page which shows: </p></li>
+                        <ul style="font-size: 26px;">
+                            <li>--> Shortest Path Calcuated Using the Algorithm</li></span>
+                            <li>--> Visualizer for The algorithm</li>
+                            <li>--> Comaparison of Path To Google Directions API Path</li>
+                        </ul>
+
+                    
+                </ol>
+
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        
+    </div>
+
+        
+      </div>
+        
+       
+    </body>
+</html>

@@ -1,0 +1,143 @@
+{% load jsonify %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport"content="initial-scale=1.0, user-scalable=no"/>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static '/css/magic.min.css' %}">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?key={{GMAPS_API_KEY}}&sensor=false">
+        </script>
+        <script src="https://kit.fontawesome.com/d1f3dd87b7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+        <script>
+            var shortestPathCoords = {{SHORTEST_PATH_COORDS}}
+            //console.log(shortestPath)
+            //console.log(nodes)
+        </script>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+        <script src="{% static '/js/showpath.js' %}"></script>
+
+    </head>
+
+    <body style="background-color:black">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <form>
+                        <button id="back" style="margin-top: 20px;"class="follow-button" formaction="{% url 'index' %}">Back To Map</button>
+                    </form>
+                </div>
+                <div class="col-sm-4">
+                    <h1 style="align-content: center;" class="heading">Shortest Path Found!</h1>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 10px;">
+                        <div id="map_canvas" class="embed-responsive-item"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div style="background-color:rebeccapurple" class="heading">{{ALGORITHM}} Visualizer</div>
+
+        <div class="container" style="margin-top:10px">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <h1 id="selected-algorithm" style="text-align: center; display: none;" class="heading">{{ALGORITHM}}</h1>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <div style="margin-bottom: 15px;"class="row">
+                <div class="col-sm-4">
+                    <button class="start-button" type="submit" id="mazes" style="background-color: skyblue;">Create A Random Maze</button>
+                </div>
+                <div style="text-align: right" class="col-sm-8">
+                    <button class="start-button" type="submit" id="startBtn" style="text-align: center;">Start</button>
+                    <button class="start-button" type="button" class="btn btn-outline-warning btn-space" type="submit" id="clearBtn" style="text-align: center;">Clear Board</button>
+                </div>
+            </div>
+      
+           <div class="row">
+                <div class="col-sm-2">
+                    <div class="key wall"></div>  
+                    <div style="color:whitesmoke;"> Wall</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="key start"></div>  
+                    <div style="color:whitesmoke;">Start</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="key end"></div>  
+                    <div style="color:whitesmoke;">Target</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="key visited"></div>  
+                    <div style="color:whitesmoke;">Visited</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="key success"></div>  
+                    <div style="color:whitesmoke;">Shortest-Path</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="key"></div>  
+                    <div style="color:whitesmoke;">Unvisited</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div class="d-flex flex-column align-items-center" id="bigTableContainer">
+                        <div id="tableContainer"></div>
+                        <!-- <div id="update">Click or drag cells to build walls. <br/>Press the 'Start' button when you finish and have selected an algorithm.</div> -->
+                     </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+
+        </div>
+
+        <div style="background-color:rebeccapurple" class="heading">Path Comparison To Google Maps Directions API</div>
+
+        <div class="container-fluid">
+
+            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 10px;">
+                        <div id="map_dir_canvas" class="embed-responsive-item"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+           
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{% static '/js/visualizer.js' %}"></script>
+    </body>
+</html>
+<!-------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------------------------->
+<!--!-->
+
+	
