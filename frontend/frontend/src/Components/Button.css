@@ -1,0 +1,22 @@
+.Button{
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 14px 25px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    transition: 0.25s;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 24px;
+    background-color: tomato;
+    color: white;
+}
+
+.Button:hover{
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.18);
+    transform: translateY(-2px);
+    transition: 0.25s;
+    background-color:whitesmoke;
+    color:black;
+}

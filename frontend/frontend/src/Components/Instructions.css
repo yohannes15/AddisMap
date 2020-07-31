@@ -1,0 +1,11 @@
+.Instructions {
+    font-family: 'Roboto Mono', monospace;;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: white;
+    font-size: 30px;
+}
+
+.Instructions-bullet {
+    font-size: 26px;
+}
