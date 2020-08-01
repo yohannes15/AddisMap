@@ -1,6 +1,6 @@
 # AddisMap Shortest Path Finding 
 
-# Introduction
+# Introduction -> (This is using Django Templates. Check my ReactJS branch to get the code that works with frontend react, and backend Python with Django Rest Framework)
 
 This project was inspired by my desire to learn different path finding algorithms.
 
