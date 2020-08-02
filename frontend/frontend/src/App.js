@@ -8,6 +8,7 @@ import axios from 'axios'
 import {Helmet} from "react-helmet";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+
 import './App.css';
 
 const location = {
@@ -42,16 +43,14 @@ componentDidMount(){
   render(){
     return (
     <div>
-      {/* <Helmet>
-            <script type="text/javascript" src={this.state.URL} ></script>
-        </Helmet> */}
       <Router >
           <div className='App'>
             <Route exact path='/showpath/' component={withRouter(ShowPath)} />
             <Route exact path='/' component={withRouter(MapApp)} />
-            
+
           </div>
       </Router>
+   
     </div>
     )
   }

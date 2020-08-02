@@ -3,6 +3,7 @@ import './ShowPath.css';
 import ShowHeader from './Components/ShowHeader'
 import Map from './Components/Map'
 import Divider from './Components/Divider'
+import Visualizer from './Components/Visualizer'
 
 
 const marginTopBottom = {
@@ -21,15 +22,19 @@ const whiteColor = {
 
 export class ShowPath extends Component {
     render() {
+        console.log(this.props.location.state.shortestPath, this.props.location.state.algorithm)
+        
         return (
             <div>
-                <ShowHeader />
+                <ShowHeader/>
                 <div className="row" style={marginTopBottom}>
                     <div className="col-sm-2"></div>
                     <Map />
                     <div className="col-sm-2"></div>
                 </div>
-                <Divider name="Visualizer" />
+                <Divider name={`${this.props.location.state.algorithm} Visualizer`} />
+                <Visualizer algorithm={this.props.location.state.algorithm}/>
+                
             </div>
         );
     }

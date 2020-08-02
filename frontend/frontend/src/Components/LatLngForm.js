@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import "./LatLngForm.css";
+import axios from 'axios'
+import { withRouter} from 'react-router-dom'
 
 const centerAlign = {
     textAlign: 'center',
@@ -14,16 +16,43 @@ export class LatLngForm extends Component {
             startLongitude: '',
             targetLatitude: '',
             targetLongitude: '',
-            algorithm: 'Dijkstra'
+            algorithm: 'Dijkstra',
+            shortestPathCoords: []
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
 
-    handleSubmit = (event) => {
-
+    handleSubmit = (event, requestType) => {
         event.preventDefault()
-    }
+        const startLatitude = event.target.elements.startLatitude.value
+        const startLongitude = event.target.elements.startLongitude.value
+        const targetLatitude = event.target.elements.targetLatitude.value
+        const targetLongitude = event.target.elements.targetLongitude.value
+        const algorithm = event.target.elements.algorithm.value
+
+        // console.log(startLatitude,startLongitude, targetLatitude, targetLongitude, algorithm)
+
+        if (requestType == 'post'){
+            axios.post('http://127.0.0.1:8000/api/', {
+                startLatitude: startLatitude,
+                startLongitude: startLongitude,
+                targetLatitude: targetLatitude,
+                targetLongitude: targetLongitude,
+                algorithm, algorithm
+            })
+            .then(res =>
+            this.setState({
+                shortestPathCoords: res.data.COORDS}
+                ,()=> this.props.history.push({
+                    state: {shortestPath: this.state.shortestPathCoords,
+                    algorithm: this.state.algorithm},
+                    pathname: '/showpath'
+                })))
+            .catch(err => console.error(err))
+       
+        } 
+    }  
 
     handleChange(event){
         const target = event.target
@@ -32,16 +61,28 @@ export class LatLngForm extends Component {
         this.setState({
             [name]: target.value
         })
-
-        console.log(target.value)
     }
+
+    componentWillUnmount() {
+        // fix Warning: Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
 
     render() {
 
         return (
+        
         <div className="col-sm-2">
            <div>
-            <form onSubmit={this.handleSubmit} className='color'/>
+            <form 
+            onSubmitCapture={(event) => this.handleSubmit(
+                event, this.props.requestType
+            )} 
+            className='color'
+            >
                <div className="form-group">
                    <label>
                        Start Latitude:
@@ -112,17 +153,18 @@ export class LatLngForm extends Component {
                 </div>
 
                     <div style={centerAlign}>
-                        <button className="btn btn-default">
+                        <button className="btn btn-default" type="primary" htmltype="submit">
                             Submit
                         </button>
                     </div>
-               </div>
+                </form>
+           </div>
            </div>
         )
     }
 }
 
-export default LatLngForm
+export default withRouter(LatLngForm)
 
   {/* <div>
                 <form method="POST" role="form" id="latlngform">

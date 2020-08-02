@@ -22,12 +22,6 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-class TestView(APIView):
-    def get(self, request, *args, **kwargs):
-        data = {
-            'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q'
-        }
-        return Response(data)
 
 def mapapp(request):
     if request.method == 'GET':

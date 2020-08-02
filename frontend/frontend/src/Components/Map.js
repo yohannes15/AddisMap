@@ -65,7 +65,9 @@ export class MapContainer extends Component {
           startLatitude : '',
           startLongitude : '',
           targetLatitude : '',
-          targetLongitude : ''
+          targetLongitude : '',
+          centerLat: '39.0431',
+          centerLng: '-76.9850'
         };
         this.handleMapClick = this.handleMapClick.bind(this);
       };
@@ -125,18 +127,42 @@ export class MapContainer extends Component {
         map.panTo(location);
     };
 
-    render() {
+    componentWillReceiveProps(newProps){
+      if (newProps.centerLat!= this.props.centerLat && newProps.centerLng!= this.props.centerLng){
+        this.setState(prev => ({
+          centerLat: newProps.centerLat,
+          centerLng: newProps.centerLng,
+          startLocations: [],
+          endLocations: [],
+          startLatitude : '',
+          startLongitude : '',
+          targetLatitude : '',
+          targetLongitude : '',
+        }))
 
+        this.props.handleStateUpdate(
+          "",
+          "",
+          "",
+          ""
+          )
+      }
+
+    }
+
+    render() {
+      console.log(this.state.centerLat)
         return (
             <div style={rightAlign} className="col-sm-8">
                 <div className="embed-responsive embed-responsive-16by9" style={marginBottom}>
                     <div className="embed-responsive-item">
                         
                     <Map
+                        key={new Date().getTime()}
                         google={this.props.google}
                         className={"map"}
                         zoom={this.props.zoom}
-                        initialCenter={this.props.center}
+                        initialCenter={{lat: this.state.centerLat, lng: this.state.centerLng}}
                         onClick={this.handleMapClick}
                         minZoom={16}
                         maxZoom={16}

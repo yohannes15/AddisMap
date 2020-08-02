@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from mapvis.views import mapapp, TestView
+from mapvis.views import mapapp
 from mapvis.views import showPath
 from mapvis.views import addisMapapp
 from django.views.generic import TemplateView
@@ -27,15 +27,8 @@ urlpatterns = [
     path('api/', include('mapvis.api.urls')),
 
 
-
-
-
-
-
-    # path('', TestView.as_view(), name='test'),
-    # path('showpath/', showPath, name="showpath"),
     path('showpath/', TemplateView.as_view(template_name='index.html')),
-    path('', mapapp, name="index"),
+    path('', TemplateView.as_view(template_name='index.html')),
     
     path('gerji/', addisMapapp, name="addismap")
     #path('update', update),

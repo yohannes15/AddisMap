@@ -6,13 +6,6 @@ const marginTop = {
     marginTop: "20px"
 }
 
-const location = {
-    address: 'Center',
-    lat: 39.0431,
-    lng: -76.9850,
-}
-
-
 export class MapForm extends Component {
     constructor(props){
         super(props)
@@ -21,19 +14,21 @@ export class MapForm extends Component {
             startLatitude : '',
             startLongitude : '',
             targetLatitude : '',
-            targetLongitude : ''
+            targetLongitude : '',
+
         }
     }
+
 
     handleStateUpdate = (startLat, startLng, targetLat, targetLng) => {
         this.setState(prev => ({
             startLatitude : startLat,
             startLongitude : startLng,
             targetLatitude : targetLat,
-            targetLongitude : targetLng
+            targetLongitude : targetLng,
         }))
-
     }
+
 
     render() {
         return (
@@ -43,9 +38,9 @@ export class MapForm extends Component {
                 startLng={this.state.startLongitude}
                 targetLat={this.state.targetLatitude}
                 targetLng={this.state.targetLongitude}
-                handleStateUpdate={this.state.handleStateUpdate}
+                requestType="post"
                 />
-                <Map center={{ lat:39.0431, lng: -76.9850}} zoom={16} handleStateUpdate={this.handleStateUpdate} />
+                <Map handleStateUpdate={this.handleStateUpdate} centerLat= {this.props.centerLat}  centerLng={this.props.centerLng} zoom={16} />
             </div>
         )
     }

@@ -216,7 +216,7 @@ if ($( "#selected-algorithm").text()=='A-Star'){
 	startAlgorithm($( "#selected-algorithm").text())
 };
 
-if ($( "#selected-algorithm").text()=='A-Star'){
+if ($( "#selected-algorithm").text()=='Breadth-First Search (BFS)'){
 	startAlgorithm($( "#selected-algorithm").text())
 };
 
@@ -800,6 +800,7 @@ function clearBoard( keepWalls ){
 	var endCellIndex = (endCell[0] * (totalCols)) + endCell[1];
 	for (var i = 0; i < cells.length; i++){
 			isWall = $( cells[i] ).hasClass("wall");
+			console.log("HEY")
 			$( cells[i] ).removeClass();
 			if (i == startCellIndex){
 				$(cells[i]).addClass("start"); 
