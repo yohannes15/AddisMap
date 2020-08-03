@@ -1,6 +1,10 @@
 # AddisMap Shortest Path Finding 
 
-# Introduction -> (This is using Django Templates. Check my ReactJS branch to get the code that works with frontend react, and backend Python with Django Rest Framework)
+# Introduction
+
+## There are two branches in this repository. The main master branch is one that uses Django templates with JS for the frontend. 
+
+## Check my other branch (name: reactJS) to get the code for the project that utilizes Django REST Framework as the backend and React as the frontend. Both of them are exactly the same.
 
 This project was inspired by my desire to learn different path finding algorithms.
 
@@ -69,16 +73,6 @@ The data for this map is extracted from OpenStreetMap. If you would like to work
 * **tests.py** --> Unit tests. Right now, it is only a test class for the Nodes and Edges, but I am working on adding as much tests as possible for the algorithms.
 
 **THE OTHER FILES ARE DJANGO SPECIFIC APPS, WHICH YOU CAN LEARN FROM THE WONDERFUL DJANGO DOCS. **
-
-
-
-
-
-
-
-
-
-
 
 
 
