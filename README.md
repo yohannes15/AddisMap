@@ -4,7 +4,7 @@
 
 ## There are two branches in this repository. The main master branch is one that uses Django templates with JS for the frontend. 
 
-## Check my other branch (name: reactJS) to get the code for the project that utilizes Django REST Framework as the backend and React as the frontend. Both of them are exactly the same.
+## Check my other branch to get the code for the project that utilizes Django REST Framework as the backend and React as the frontend. Both of them are exactly the same.
 
 This project was inspired by my desire to learn different path finding algorithms.
 
