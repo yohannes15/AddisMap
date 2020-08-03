@@ -13,10 +13,6 @@ const centerAlign = {
     textAlign: 'center'
 }
 
-const blueBackground = {
-    backgroundColor: 'skyblue'
-
-}
 
 const whiteSmoke = {
     color: 'whitesmoke'
@@ -28,12 +24,11 @@ const displayNone = {
 
 export class ControlVisualizer extends Component {
     render() {
-        console.log(this.props.algorithm)
         return (
         <div>
 
             <h1 id="selected-algorithm" style={displayNone}>{this.props.algorithm}</h1>
-            <div style={marginBottom} className="row">
+            {/* <div style={marginBottom} className="row">
                 <div className="col-sm-4">
                     <button className="start-button" htmltype="submit" id="mazes" style={blueBackground}>Create A Random Maze</button>
                 </div>
@@ -41,7 +36,7 @@ export class ControlVisualizer extends Component {
                     <button className="start-button" htmltype="submit" id="startBtn" style={centerAlign}>Start</button>
                     <button className="start-button" htmltype="submit" id="clearBtn" style={centerAlign}>Clear Board</button>
                 </div>
-            </div>
+            </div> */}
 
             <div className="row">
                     <div className="col-sm-2">

@@ -1,0 +1,63 @@
+
+.grid {
+  margin: 16px 8px 0px 8px;
+}
+
+
+#primary-button{
+  border-radius: 8px;
+  background-color: rgba(0, 217, 159, 0.75);
+  border: none;
+  padding: 12px 8px;
+  margin-right: 8px;
+  color: #ffffff;
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: 600;
+}
+
+#secondary-button{
+  border-radius: 8px;
+  color: rgba(0, 217, 159, 0.75);
+  border: 1px solid rgba(0, 217, 159, 0.75);
+  padding: 12px 8px;
+  margin-right: 8px;
+  background-color: #ffffff;
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: 600;
+}
+
+.legends{
+  padding: 8px;
+}
+
+.legend{
+  width: 25px;
+  height: 25px;
+}
+
+button {
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 14px 25px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  transition: 0.25s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 24px;
+}
+
+button:hover {
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+  transition: 0.25s;
+  background-color:whitesmoke;
+  color:black;
+}
+
+.start-button {
+  background-color: tomato;
+  color: white;
+  font-size: 18px;
+}

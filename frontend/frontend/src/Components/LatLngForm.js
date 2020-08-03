@@ -46,7 +46,9 @@ export class LatLngForm extends Component {
                 shortestPathCoords: res.data.COORDS}
                 ,()=> this.props.history.push({
                     state: {shortestPath: this.state.shortestPathCoords,
-                    algorithm: this.state.algorithm},
+                    algorithm: this.state.algorithm, 
+                    centerLat: this.props.centerLat,
+                    centerLng: this.props.centerLng},
                     pathname: '/showpath'
                 })))
             .catch(err => console.error(err))

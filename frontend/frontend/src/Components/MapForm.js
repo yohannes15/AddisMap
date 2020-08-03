@@ -38,6 +38,8 @@ export class MapForm extends Component {
                 startLng={this.state.startLongitude}
                 targetLat={this.state.targetLatitude}
                 targetLng={this.state.targetLongitude}
+                centerLat={this.props.centerLat}
+                centerLng={this.props.centerLng}
                 requestType="post"
                 />
                 <Map handleStateUpdate={this.handleStateUpdate} centerLat= {this.props.centerLat}  centerLng={this.props.centerLng} zoom={16} />

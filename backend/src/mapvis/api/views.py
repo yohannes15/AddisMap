@@ -72,8 +72,8 @@ class MapView(APIView):
         #print(shortestPath)
 
         jsonShortestPathCoords = json.dumps(shortestPathCoords)
-        print(jsonShortestPathCoords)
+        print(shortestPathCoords)
         return Response({
-            'COORDS': jsonShortestPathCoords
+            'COORDS': shortestPathCoords
         })
         

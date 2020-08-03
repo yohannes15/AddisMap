@@ -1,0 +1,106 @@
+
+.node {
+  width: 20px;
+  height: 20px;
+  outline: 1px solid beige
+}
+
+.finish {
+  background-color:rebeccapurple;
+	border-color: rebeccapurple;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.start {
+  background-color: greenyellow;
+	border-color: greenyellow;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.visited {
+  animation-name: visitedAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  background-color: thistle;
+	border-color: thistle;
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(255, 153, 51, 0.75);
+  }
+
+  50% {
+    background-color: #1cd4b5;
+	  border-color: #1cd4b5;
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: #1cd4b5;
+	  border-color: #1cd4b5;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: thistle;
+    border-color: thistle;
+  }
+}
+
+.wall {
+  background-color: rgb(40, 40, 80);
+}
+
+.shortest-path {
+  animation-name: shortestPath;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPath {
+  0% {
+    background-color: #ffee31;
+    border-color: #ffee31;
+  }
+
+  50% {
+    background-color: #ffee31;
+    border-color: #ffee31;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rebeccapurple;;
+    border-color: #ffee31;
+  }
+}
+
+.shortest-path-start{
+  background-color: greenyellow;
+	border-color: greenyellow;
+  background-position: center;
+  opacity: 0.4;
+}
+
+.shortest-path-finish{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color:rebeccapurple;
+	border-color: rebeccapurple;
+}
