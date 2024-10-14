@@ -22,7 +22,7 @@ def mapapp(request):
         request.session['algorithms'] = None
         context = {
             'message':message,
-            'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q'
+            'GMAPS_API_KEY': 'GMAPS_API_KEY'
         }
 
     if request.method == 'POST':
@@ -92,7 +92,7 @@ def addisMapapp(request):
         request.session['algorithms'] = None
         context = {
             'message':message,
-            'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q'
+            'GMAPS_API_KEY': 'GMAPS_API_KEY'
         }
 
     if request.method == 'POST':
