@@ -1,0 +1,29 @@
+[project]
+name = "addismap"
+version = "0.1.0"
+description = "Django React application for map visualization"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "django>=4.2.0,<5.0.0",
+    "djangorestframework>=3.14.0",
+    "django-cors-headers>=4.3.1",
+    "python-dotenv>=1.0.0",
+    "psycopg2-binary>=2.9.9",
+    "gunicorn>=21.2.0",
+    "requests>=2.31.0",
+    "urllib3>=2.1.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.11.0",
+    "pytest>=7.4.3",
+    "pytest-django>=4.7.0",
+    "pytest-cov>=4.1.0",
+    "debugpy>=1.8.0"
+]
+
+[build-system]
+requires = ["hatchling>=1.18.0"]
+build-backend = "hatchling.build" 
