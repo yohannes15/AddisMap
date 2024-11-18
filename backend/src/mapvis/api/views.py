@@ -1,13 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
-from django.conf import settings
-from django.core.serializers.json import DjangoJSONEncoder
-
-from mapvis.store import Node, NodeSet
-from mapvis.parser import get_default_parser, print_osm_data
 from mapvis.extract import extract_osm_nodes, extract_osm_edges
 from mapvis.adjacency import adjacency_list
 from mapvis.algorithms import closestNodeTo, shortestPathLatLng
@@ -15,16 +8,15 @@ from mapvis.dijkstra import dijkstra
 from mapvis.bfs import breadth_first_search
 from mapvis.greedysearch import greedy_search
 from mapvis.astar import a_star_search
-from mapvis.parser_POST import POST_parser
 
 from collections import namedtuple
-import os, json
-from django.http import JsonResponse
+import os
+
 
 class MapView(APIView):
     def get(self, request, *args, **kwargs):
         data = {
-            "GMAPS_API_KEY": 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q'
+            "GMAPS_API_KEY": os.getenv("GMAPS_API_KEY")
         }
         return Response(data)
     
@@ -69,9 +61,6 @@ class MapView(APIView):
 
         
         shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
-        #print(shortestPath)
-
-        jsonShortestPathCoords = json.dumps(shortestPathCoords)
         print(shortestPathCoords)
         return Response({
             'COORDS': shortestPathCoords

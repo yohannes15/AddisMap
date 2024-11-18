@@ -1,10 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
-from django.conf import settings
-from django.core.serializers.json import DjangoJSONEncoder
 
-from mapvis.store import Node, NodeSet
-from mapvis.parser import get_default_parser, print_osm_data
 from mapvis.extract import extract_osm_nodes, extract_osm_edges
 from mapvis.adjacency import adjacency_list
 from mapvis.algorithms import closestNodeTo, shortestPathLatLng
@@ -16,11 +11,6 @@ from mapvis.parser_POST import POST_parser
 
 from collections import namedtuple
 import os, json
-from django.http import JsonResponse
-
-#third party imports
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
 
 def mapapp(request):
@@ -29,7 +19,7 @@ def mapapp(request):
         request.session['algorithms'] = None
         context = {
             'message':message,
-            'GMAPS_API_KEY': 'GMAPS_API_KEY'
+            'GMAPS_API_KEY': os.getenv('GMAPS_API_KEY')
         }
 
     if request.method == 'POST':
@@ -39,13 +29,12 @@ def mapapp(request):
         edges = extract_osm_edges(osmPath)
         adj_list = adjacency_list(nodes, edges)
         node = namedtuple('Node', ['lat', 'lng'])
-#####
+
         post = POST_parser(request)
         startNodeLatLng = node(post.lat1, post.lng1)
         destinationNodeLatLng = node(post.lat2, post.lng2)
         closestNodeToStart = closestNodeTo(startNodeLatLng,nodes)
         closestNodeToDestination = closestNodeTo(destinationNodeLatLng, nodes)
-
 
         shortestPath = []
         searchAlgorithm = request.POST.get('search-algo')
@@ -70,10 +59,8 @@ def mapapp(request):
             request.session['algorithm'] = searchAlgorithm
         
         shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
-        #print(shortestPath)
 
         jsonShortestPathCoords = json.dumps(shortestPathCoords)
-        #print(jsonShortestPathCoords)
 
         request.session['shortestPathCoords'] = jsonShortestPathCoords
         return redirect('/showpath/')
@@ -87,7 +74,7 @@ def showPath(request):
     print(shortestPathCoords)
     algorithm = request.session.get('algorithm')
     context = {
-        'GMAPS_API_KEY': 'AIzaSyAv0SjrNE-LMf6LncO5Lx40XP1VlGVCS6Q',
+        'GMAPS_API_KEY': os.getenv("GMAPS_API_KEY"),
         'SHORTEST_PATH_COORDS': shortestPathCoords,
         'ALGORITHM': algorithm
     }
@@ -99,7 +86,7 @@ def addisMapapp(request):
         request.session['algorithms'] = None
         context = {
             'message':message,
-            'GMAPS_API_KEY': 'GMAPS_API_KEY'
+            'GMAPS_API_KEY': os.getenv("GMAPS_API_KEY")
         }
 
     if request.method == 'POST':
@@ -109,7 +96,7 @@ def addisMapapp(request):
         edges = extract_osm_edges(osmPath)
         adj_list = adjacency_list(nodes, edges)
         node = namedtuple('Node', ['lat', 'lng'])
-#####
+
         post = POST_parser(request)
         startNodeLatLng = node(post.lat1, post.lng1)
         destinationNodeLatLng = node(post.lat2, post.lng2)
@@ -140,10 +127,8 @@ def addisMapapp(request):
             request.session['algorithm'] = searchAlgorithm
         
         shortestPathCoords = shortestPathLatLng(shortestPath, nodes)
-        #print(shortestPath)
 
         jsonShortestPathCoords = json.dumps(shortestPathCoords)
-        #print(jsonShortestPathCoords)
 
         request.session['shortestPathCoords'] = jsonShortestPathCoords
         return redirect('/showpath/')
