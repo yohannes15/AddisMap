@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.conf import settings
 from mapvis.extract import extract_osm_nodes, extract_osm_edges
 from mapvis.adjacency import adjacency_list
 from mapvis.algorithms import closestNodeTo, shortestPathLatLng
@@ -19,7 +19,7 @@ def mapapp(request):
         request.session['algorithms'] = None
         context = {
             'message':message,
-            'GMAPS_API_KEY': os.getenv('GMAPS_API_KEY')
+            'GMAPS_API_KEY': settings.GMAPS_API_KEY
         }
 
     if request.method == 'POST':
@@ -74,7 +74,7 @@ def showPath(request):
     print(shortestPathCoords)
     algorithm = request.session.get('algorithm')
     context = {
-        'GMAPS_API_KEY': os.getenv("GMAPS_API_KEY"),
+        'GMAPS_API_KEY': settings.GMAPS_API_KEY,
         'SHORTEST_PATH_COORDS': shortestPathCoords,
         'ALGORITHM': algorithm
     }
@@ -86,7 +86,7 @@ def addisMapapp(request):
         request.session['algorithms'] = None
         context = {
             'message':message,
-            'GMAPS_API_KEY': os.getenv("GMAPS_API_KEY")
+            'GMAPS_API_KEY': settings.GMAPS_API_KEY
         }
 
     if request.method == 'POST':

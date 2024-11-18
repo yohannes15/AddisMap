@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -10,13 +11,12 @@ from mapvis.greedysearch import greedy_search
 from mapvis.astar import a_star_search
 
 from collections import namedtuple
-import os
 
 
 class MapView(APIView):
     def get(self, request, *args, **kwargs):
         data = {
-            "GMAPS_API_KEY": os.getenv("GMAPS_API_KEY")
+            "GMAPS_API_KEY": settings.GMAPS_API_KEY
         }
         return Response(data)
     
