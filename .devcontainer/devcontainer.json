@@ -1,0 +1,86 @@
+// For format details, see https://aka.ms/devcontainer.json 
+// For config options, see https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose 
+{
+    "name": "AddisMap Development",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "backend",
+    "workspaceFolder": "/app",
+    "overrideCommand": true,
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": { "username": "none" }
+    },
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    // Configure tool-specific properties. 
+    "customizations": { 
+        // Configure properties specific to VS Code. 
+        "vscode": { 
+            // Set *default* container specific settings.json values on container create. 
+            "settings": { 
+                /* Python Editor Settings */ 
+                "python.defaultInterpreterPath": "/usr/local/bin/python", 
+                "[python]": { 
+                    "editor.formatOnType": true, 
+                    "editor.defaultFormatter": "ms-python.black-formatter", 
+                    "editor.formatOnSave": true
+                }, 
+                "autoDocstring.docstringFormat": "one-line-sphinx", 
+                /* Python Test Settings */ 
+                "python.testing.pytestEnabled": true, 
+                "python.testing.pytestArgs": ["tests"], 
+                "python.testing.unittestEnabled": false, 
+                /* Python Language Server Settings */ 
+                "python.analysis.autoImportCompletions": true, 
+                "python.analysis.completeFunctionParens": true, 
+                "python.analysis.autoFormatStrings": true, 
+                "python.analysis.packageIndexDepths": [
+                    { "name": "django", "depth": 5 } 
+                ], 
+                /* PyLint Settings */ 
+                "pylint.enabled": true, 
+                "pylint.args": [ 
+                    "--disable=C0114,C0115,C0116,R0903", "--load-plugins", "pylint_django", "--django-settings-module", "addismap.settings" 
+                ], 
+                "editor.quickSuggestions": { "strings": "on" }, 
+                "files.insertFinalNewline": true, 
+                "files.associations": { 
+                    "**/*.html": "html", 
+                    "**/templates/**/*.html": "django-html",
+                    "**/templates/**/*": "django-txt" 
+                }, 
+                "launch": { 
+                    "configurations": [ 
+                        { 
+                            "name": "(Debug): AddisMap-Server", 
+                            "type": "debugpy", 
+                            "request": "launch", 
+                            "args": ["runserver", "0.0.0.0:8000"], "django": true, "justMyCode": false, "program": "${workspaceFolder}/addismap/manage.py" } 
+                        ] 
+                    }, 
+                    "tasks": { 
+                        "version": "2.0.0", 
+                        "tasks": [ 
+                            { "label": "(Run): AddisMap-Server", "type": "process", "command": "python", "args": ["${workspaceFolder}/addismap/manage.py", "runserver", "0.0.0.0:8000"] } 
+                        ] 
+                    } 
+            }, 
+            "extensions": [
+                "ms-python.python",
+                "ms-python.pylint",
+                "ms-python.vscode-pylance",
+                "ms-python.debugpy",
+                "ms-python.black-formatter",
+                "njpwerner.autodocstring",
+                // Django
+                "batisteo.vscode-django",
+                // Docker
+                "ms-azuretools.vscode-docker",
+                // ESLint
+                "dbaeumer.vscode-eslint",
+                // Prettier
+                "esbenp.prettier-vscode",
+                // Markdown
+                "shd101wyy.markdown-preview-enhanced"
+            ]
+        }
+    }
+}

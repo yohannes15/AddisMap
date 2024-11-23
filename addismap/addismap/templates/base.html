@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>{% block title %}Shortest Path Finder{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% block extra_css %}{% endblock %}
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% if GMAPS_API_KEY %}
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ GMAPS_API_KEY }}&libraries=places"></script>
+    {% else %}0
+        <div class="alert alert-danger" role="alert">
+            Google Maps API key is not configured. Please set GOOGLE_MAPS_API_KEY in your environment variables.
+        </div>
+    {% endif %}
+    {% block extra_js %}{% endblock %}
+</head>
+<body style="background-color: black;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8" style="margin-top: 10px;">
+                <div class="heading">Shortest Path Finder and Visualizer</div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    {% block extra_js_bottom %}{% endblock %}
+</body>
+</html> 

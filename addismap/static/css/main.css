@@ -220,5 +220,34 @@ ul {
 .fun-fact {
 	color: darkgreen;
 }
+
+.steps {
+    color: whitesmoke;
+    font-size: 18px;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.steps li {
+    margin-bottom: 15px;
+}
+
+.algorithm-features {
+    font-size: 22px;
+    margin-top: 10px;
+    padding-left: 30px;
+}
+
+.algorithm-features li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.algorithm-features li:before {
+    content: "-->";
+    position: absolute;
+    left: -25px;
+    color: #9370db;
+}
   
   

@@ -1,0 +1,31 @@
+<form method="POST" role="form" id="latlngform">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="start-latitude">Start Latitude</label>
+        <input type="number" step="any" class="form-control" name="start-latitude" id="start-latitude" placeholder="Latitude" required>
+    </div>
+    <div class="form-group">
+        <label for="start-longitude">Start Longitude</label>
+        <input type="number" step="any" class="form-control" name="start-longitude" id="start-longitude" placeholder="Longitude" required>
+    </div>
+    <div class="form-group">
+        <label for="destination-latitude">Target Latitude</label>
+        <input type="number" step="any" class="form-control" name="destination-latitude" id="destination-latitude" placeholder="Latitude" required>
+    </div>
+    <div class="form-group">
+        <label for="destination-longitude">Target Longitude</label>
+        <input type="number" step="any" class="form-control" name="destination-longitude" id="destination-longitude" placeholder="Longitude" required>
+    </div>
+    <div class="form-group">
+        <label for="algorithm">Choose Algorithm: </label>
+        <select id="algorithm" name="search-algo" class="form-control">
+            <option value="Dijkstra">Dijkstra</option>
+            <option value="A-Star">A Star (A*)</option>
+            <option value="Breadth-First Search">Breadth-First Search (BFS)</option>
+            <option value="Greedy Best-First Search">Greedy Best-First Search</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Find Path</button>
+    </div>
+</form> 
