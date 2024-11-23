@@ -42,7 +42,7 @@
                 /* PyLint Settings */ 
                 "pylint.enabled": true, 
                 "pylint.args": [ 
-                    "--disable=C0114,C0115,C0116,R0903", "--load-plugins", "pylint_django", "--django-settings-module", "greyhound.settings.dev" 
+                    "--disable=C0114,C0115,C0116,R0903", "--load-plugins", "pylint_django", "--django-settings-module", "addismap.settings" 
                 ], 
                 "editor.quickSuggestions": { "strings": "on" }, 
                 "files.insertFinalNewline": true, 
@@ -54,7 +54,7 @@
                 "launch": { 
                     "configurations": [ 
                         { 
-                            "name": "(Debug): Greyhound-Server", 
+                            "name": "(Debug): AddisMap-Server", 
                             "type": "debugpy", 
                             "request": "launch", 
                             "args": ["runserver", "0.0.0.0:8000"], "django": true, "justMyCode": false, "program": "${workspaceFolder}/src/manage.py" } 
@@ -63,7 +63,7 @@
                     "tasks": { 
                         "version": "2.0.0", 
                         "tasks": [ 
-                            { "label": "(Run): Greyhound-Server", "type": "process", "command": "python", "args": ["${workspaceFolder}/src/manage.py", "runserver", "0.0.0.0:8000"] } 
+                            { "label": "(Run): AddisMap-Server", "type": "process", "command": "python", "args": ["${workspaceFolder}/src/manage.py", "runserver", "0.0.0.0:8000"] } 
                         ] 
                     } 
             }, 
