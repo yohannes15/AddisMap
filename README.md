@@ -1,5 +1,8 @@
 # AddisMap Shortest Path Finding 
 
+To Run Locally: 
+- Use Dev Container JSON or spin up the compose containers. Might be some quirks. 
+
 # Introduction
 
 ## There are two branches in this repository. The main master branch is one that uses Django templates with JS for the frontend. 
