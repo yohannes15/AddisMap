@@ -3,6 +3,12 @@
 To Run Locally: 
 - Use Dev Container JSON or spin up the compose containers. Might be some quirks. 
 
+## Portfolio
+
+An interactive pathfinding visualizer that demonstrates classic graph algorithms (Dijkstra, A*, BFS, Greedy-First) on real-world map data from OpenStreetMap. Built with Django, Django REST Framework, and React, this project allows users to select start and end points on a map and watch the algorithms find the shortest path in real-time.
+
+The visualization compares algorithm performance and accuracy against Google Maps' routing. Originally developed to explore pathfinding in Addis Ababa, Ethiopia (where I grew up), it now includes areas in Maryland and New York. Features a full-stack architecture with geospatial data processing and interactive frontend animations.
+
 # Introduction
 
 ## There are two branches in this repository. The main master branch is one that uses Django templates with JS for the frontend. 
